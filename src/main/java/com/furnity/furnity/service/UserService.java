@@ -38,10 +38,27 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found in Data Base" ));
     }
 
-    @DeleteMapping("/user/{id}")
-    public ResponseEntity<?> deleteUserById( @PathVariable("id") Long id){
+    public void deleteUserById(Long id){
         userRepository.deleteUserById(id);
-        return new ResponseEntity<>(HttpStatus.OK);
     }
 
+    public User updateUser(User userInfo){
+        User user = userRepository.findUserById(userInfo.getId())
+                .orElseThrow(() -> new UserNotFoundException("User by id " + userInfo.getId() +
+                        " was not found in DataBase" ));
+
+        user.setFirstName(userInfo.getFirstName());
+        user.setLastName(userInfo.getLastName());
+        user.setMiddleName(userInfo.getMiddleName());
+        user.setEmail(userInfo.getEmail());
+        user.setPassword(userInfo.getPassword());
+        user.setPhoneNumber(userInfo.getPhoneNumber());
+        user.setAddressId(userInfo.getAddressId());
+        user.setCreatedAt(userInfo.getCreatedAt());
+        user.setUpdatedAt(userInfo.getUpdatedAt());
+
+        User updatedUser = userRepository.save(user);
+
+        return userRepository.save(updatedUser);
+    }
 }
