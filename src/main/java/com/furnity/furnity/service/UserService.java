@@ -46,7 +46,7 @@ public class UserService {
         user.setFullName(userInfo.getFullName());
         user.setPhoneNumber(userInfo.getPhoneNumber());
         user.setEmail(userInfo.getEmail());
-        user.setAddressId(userInfo.getAddressId());
+        user.setAddress(userInfo.getAddress());
         user.setPassword(userInfo.getPassword());
         //user.setCreatedAt(userInfo.getCreatedAt());
         //user.setUpdatedAt(userInfo.getUpdatedAt());

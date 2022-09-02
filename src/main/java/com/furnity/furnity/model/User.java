@@ -5,7 +5,6 @@ import lombok.Data;
 import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
-import java.util.Date;
 
 @Entity
 @Table(name = "user")
@@ -21,15 +20,15 @@ public class User {
     @Column(name = "full_name", nullable = false)
     private String fullName;
 
-    @Column(name = "phone_no", nullable = false)
+    @Column(name = "phone_number", nullable = false)
     private String phoneNumber;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
-    // foreign key !!!! - return later
-    @Column(name = "address_id", nullable = false)
-    private String addressId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address_id")
+    private Address address;
 
     @Column(name = "password", nullable = false)
     private String password;
