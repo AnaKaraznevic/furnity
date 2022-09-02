@@ -4,11 +4,7 @@ import com.furnity.furnity.exception.UserNotFoundException;
 import com.furnity.furnity.model.User;
 import com.furnity.furnity.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 
 import javax.transaction.Transactional;
 import java.util.List;
@@ -47,15 +43,13 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User by id " + userInfo.getId() +
                         " was not found in DataBase" ));
 
-        user.setFirstName(userInfo.getFirstName());
-        user.setLastName(userInfo.getLastName());
-        user.setMiddleName(userInfo.getMiddleName());
-        user.setEmail(userInfo.getEmail());
-        user.setPassword(userInfo.getPassword());
+        user.setFullName(userInfo.getFullName());
         user.setPhoneNumber(userInfo.getPhoneNumber());
+        user.setEmail(userInfo.getEmail());
         user.setAddressId(userInfo.getAddressId());
-        user.setCreatedAt(userInfo.getCreatedAt());
-        user.setUpdatedAt(userInfo.getUpdatedAt());
+        user.setPassword(userInfo.getPassword());
+        //user.setCreatedAt(userInfo.getCreatedAt());
+        //user.setUpdatedAt(userInfo.getUpdatedAt());
 
         User updatedUser = userRepository.save(user);
 

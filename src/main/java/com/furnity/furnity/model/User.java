@@ -18,33 +18,27 @@ public class User {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(name = "first_name", nullable = false)
-    private String firstName;
+    @Column(name = "full_name", nullable = false)
+    private String fullName;
 
-    @Column(name = "middle_name")
-    private String middleName;
-
-    @Column(name = "last_name", nullable = false)
-    private String lastName;
+    @Column(name = "phone_no", nullable = false)
+    private String phoneNumber;
 
     @Column(name = "email", nullable = false, unique = true)
     private String email;
 
+    // foreign key !!!! - return later
+    @Column(name = "address_id", nullable = false)
+    private String addressId;
+
     @Column(name = "password", nullable = false)
     private String password;
+//
+//    @Column(name = "created_at")
+//    private Date createdAt;
+//
+//    @Column(name = "updated_at")
+//    private Date updatedAt;
 
-    @Column(name = "phone", nullable = false)
-    private String phoneNumber;
-
-    //Join columns
-
-    @Column(name = "address_id")
-    private Long addressId;
-
-    @Column(name = "created_at")
-    private Date createdAt;
-
-    @Column(name = "updated_at")
-    private Date updatedAt;
 
 }
