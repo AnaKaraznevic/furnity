@@ -6,12 +6,16 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 
+import java.util.List;
+
 @Controller
-@RequestMapping("/api/v1/")
+//@RequestMapping("/api/v1/")
 public class CategoryController {
 
     @Autowired
@@ -21,10 +25,30 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
+    /*
     @PostMapping("/category")
     public ResponseEntity<Category> addCategory( @RequestBody Category category){
         Category newCategory = categoryService.addCategory(category);
         return new ResponseEntity<>(newCategory, HttpStatus.CREATED);
     }
+     */
 
+    @GetMapping("/category")
+    public String categoriesList(Model model){
+        List<Category> categoryList = categoryService.findAllCategories();
+        model.addAttribute("categoryList" , categoryList);
+        return "category_list";
+    }
+
+    @GetMapping("/category/new")
+    public String showNewCategoryForm(Model model){
+        model.addAttribute("category", new Category());
+        return "new_category_form";
+    }
+
+    @PostMapping("/category/save")
+    public String saveCategory(Category category){
+        categoryService.addCategory(category);
+        return "redirect:/category";
+    }
 }

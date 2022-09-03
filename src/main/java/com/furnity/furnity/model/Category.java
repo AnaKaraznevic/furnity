@@ -15,12 +15,12 @@ public class Category {
     @Id
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long categoryId;
+    private Long id;
 
     @Column(name = "name", length = 45,  nullable = false, unique = true)
-    private String categoryName;
+    private String name;
 
-    public Category( String categoryName ) {
-        this.categoryName = categoryName;
+    public Category( String name ) {
+        this.name = name;
     }
 }
