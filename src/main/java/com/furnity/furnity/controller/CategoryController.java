@@ -25,7 +25,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/category/")
+    @GetMapping("/category")
     public String categoriesList(Model model){
         List<Category> categoryList = categoryService.findAllCategories();
         model.addAttribute("categoryList" , categoryList);

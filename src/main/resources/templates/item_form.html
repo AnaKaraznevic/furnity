@@ -10,7 +10,7 @@
 <div class="container text-center">
     <div><h1>Create New Item</h1></div>
 
-    <form th:action="@{/item/save}" th:object="${item}" method="post" style="max-width: 600px; margin: 0 auto">
+    <form th:action="@{/item/save}" method="post" th:object="${item}" style="max-width: 600px; margin: 0 auto">
         <div class="form-group row">
                 <label class="col-form-label col-sm-4">Item Category : </label>
                 <div class="col-sm-8">

@@ -30,6 +30,11 @@
                 <td>[[${item.description}]]</td>
                 <td>[[${item.price}]]</td>
                 <td>[[${item.itemCondition}]]</td>
+                <td>
+                    <a th:href="@{'/item/edit/' + ${item.id}}">EDIT</a>
+                    &nbsp;
+                    <a th:href="@{'/item/delete/' + ${item.id}}">DELETE</a>
+                </td>
             </tr>
         </th:block>
         </tbody>
