@@ -1,14 +1,11 @@
 package com.furnity.furnity.controller;
 
-import com.furnity.furnity.exception.ItemNotFoundException;
+
 import com.furnity.furnity.model.Category;
 import com.furnity.furnity.model.Item;
-import com.furnity.furnity.repository.ItemRepository;
 import com.furnity.furnity.service.CategoryService;
 import com.furnity.furnity.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -25,7 +22,7 @@ public class ItemController {
     private final CategoryService categoryService;
 
 
-    public ItemController( ItemService itemService, CategoryService categoryService) {
+    public ItemController( ItemService itemService, CategoryService categoryService ) {
         this.itemService = itemService;
         this.categoryService = categoryService;
     }
@@ -55,5 +52,11 @@ public class ItemController {
     public String deletePro(@PathVariable("id") Long id){
         this.itemService.deleteItem(id);
         return "redirect:/item";
+    }
+
+    @GetMapping("/item/edite/{id}")
+    public String editItem(@PathVariable (value = "id") Long id, Model model){
+        model.addAttribute("editItem", itemService.getItemById(id));
+        return "item_form";
     }
 }
