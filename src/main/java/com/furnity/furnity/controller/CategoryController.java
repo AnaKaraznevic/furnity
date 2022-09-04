@@ -25,15 +25,7 @@ public class CategoryController {
         this.categoryService = categoryService;
     }
 
-    /*
-    @PostMapping("/category")
-    public ResponseEntity<Category> addCategory( @RequestBody Category category){
-        Category newCategory = categoryService.addCategory(category);
-        return new ResponseEntity<>(newCategory, HttpStatus.CREATED);
-    }
-     */
-
-    @GetMapping("/category")
+    @GetMapping("/category/")
     public String categoriesList(Model model){
         List<Category> categoryList = categoryService.findAllCategories();
         model.addAttribute("categoryList" , categoryList);
@@ -47,7 +39,7 @@ public class CategoryController {
     }
 
     @PostMapping("/category/save")
-    public String saveCategory(Category category){
+    public String saveNewCategory(Category category){
         categoryService.addCategory(category);
         return "redirect:/category";
     }
