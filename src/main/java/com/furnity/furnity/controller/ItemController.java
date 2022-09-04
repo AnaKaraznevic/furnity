@@ -54,9 +54,13 @@ public class ItemController {
         return "redirect:/item";
     }
 
-    @GetMapping("/item/edite/{id}")
+    @GetMapping("/item/edit/{id}")
     public String editItem(@PathVariable (value = "id") Long id, Model model){
-        model.addAttribute("editItem", itemService.getItemById(id));
+        List<Category> categoryList = categoryService.findAllCategories();
+        model.addAttribute("categoryList", categoryList);
+        Item item = itemService.findItemById(id);
+        model.addAttribute("item", item);
+        System.out.println(item);
         return "item_form";
     }
 }

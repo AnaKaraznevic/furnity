@@ -33,14 +33,24 @@ public class ItemService {
         this.itemRepository.deleteById(id);
     }
 
-    public Item getItemById(Long id){
-        Optional<Item> optional = itemRepository.findById(id);
-        Item item = null ;
-        if(optional.isPresent()){
-            item = optional.get();
-        } else {
-            throw new ItemNotFoundException("Item not found for id :: " + id);
-        }
-        return item;
+    public Item findItemById(Long id){
+        return itemRepository.findById(id)
+                .orElseThrow(() -> new ItemNotFoundException("Item by id " + id + " was not found" ));
     }
+
+    public Item updateItem(Long id, Item request){
+        Optional<Item> fromDB = itemRepository.findById(id);
+        if(fromDB.isPresent()){
+            Item item = fromDB.get();
+            item.setCategory(request.getCategory());
+            item.setName(request.getName());
+            item.setPrice(request.getPrice());
+            item.setDescription(request.getDescription());
+            item.setItemCondition(request.getItemCondition());
+            return itemRepository.save(item);
+        } else {
+            throw new ItemNotFoundException("Item with ID :: " + id + " not found in DB");
+        }
+    }
+
 }
