@@ -23,24 +23,26 @@ public class ItemService {
         this.itemRepository = itemRepository;
     }
 
-    public Item addItem(Item item){ return itemRepository.save(item); }
+    public Item addItem( Item item ) {
+        return itemRepository.save(item);
+    }
 
-    public List<Item> findAllItems(){
+    public List<Item> findAllItems() {
         return itemRepository.findAll();
     }
 
-    public void deleteItem(Long id){
+    public void deleteItem( Long id ) {
         this.itemRepository.deleteById(id);
     }
 
-    public Item findItemById(Long id){
+    public Item findItemById( Long id ) {
         return itemRepository.findById(id)
-                .orElseThrow(() -> new ItemNotFoundException("Item by id " + id + " was not found" ));
+                .orElseThrow(() -> new ItemNotFoundException("Item by id " + id + " was not found"));
     }
 
-    public Item updateItem(Long id, Item request){
+    public Item updateItem( Long id, Item request ) {
         Optional<Item> fromDB = itemRepository.findById(id);
-        if(fromDB.isPresent()){
+        if (fromDB.isPresent()) {
             Item item = fromDB.get();
             item.setCategory(request.getCategory());
             item.setName(request.getName());
