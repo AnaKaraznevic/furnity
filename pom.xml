@@ -11,7 +11,7 @@
 	<groupId>com.furnity</groupId>
 	<artifactId>furnity</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<name>furnity</name>
+	<name>Furnity</name>
 	<description>Web application for secondhand furniture</description>
 	<properties>
 		<java.version>17</java.version>
@@ -75,12 +75,6 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-test</artifactId>
 			<scope>test</scope>
-		</dependency>
-
-		<dependency>
-			<groupId>org.apache.maven.plugins</groupId>
-			<artifactId>maven-clean-plugin</artifactId>
-			<version>3.2.0</version>
 		</dependency>
 
 	</dependencies>
