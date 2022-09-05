@@ -1,10 +1,10 @@
-package com.furnity.controllers;
+package com.furnity.furnity.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 
-import com.furnity.services.UserService;
+import com.furnity.furnity.service.UserService;
 
 @Controller
 public class UserController {

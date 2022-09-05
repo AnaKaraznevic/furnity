@@ -1,9 +1,9 @@
-package com.furnity.repositories;
+package com.furnity.furnity.repository;
 
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
 
-import com.furnity.entities.User;
+import com.furnity.furnity.model.User;
 
 @Repository
 public interface UserRepositories extends CrudRepository<User, Integer> {

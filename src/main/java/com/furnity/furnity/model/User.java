@@ -1,4 +1,4 @@
-package com.furnity.entities;
+package com.furnity.furnity.model;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;

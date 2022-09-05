@@ -1,4 +1,4 @@
-package com.furnity.services;
+package com.furnity.furnity.service;
 
 import org.springframework.stereotype.Service;
 
