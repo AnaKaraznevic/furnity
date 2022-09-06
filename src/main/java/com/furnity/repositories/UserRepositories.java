@@ -7,5 +7,5 @@ import com.furnity.entities.User;
 
 @Repository
 public interface UserRepositories extends CrudRepository<User, Integer> {
-
+ public User findByEmailAndPass(String email, String pass);
 }
