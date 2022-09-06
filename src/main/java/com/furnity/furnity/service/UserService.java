@@ -34,6 +34,10 @@ public class UserService {
                 .orElseThrow(() -> new UserNotFoundException("User by id " + id + " was not found in Data Base" ));
     }
 
+    public List<User> findUserByFullNameAndAddressTown (String fullName, String town) {
+        return userRepository.findByFullNameAndAddressTown(fullName,town);
+    }
+
     public void deleteUserById(Long id){
         userRepository.deleteUserById(id);
     }

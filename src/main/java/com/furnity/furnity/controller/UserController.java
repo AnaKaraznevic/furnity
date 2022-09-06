@@ -32,6 +32,12 @@ public class UserController {
         return new ResponseEntity<>(userToFindById, HttpStatus.OK);
     }
 
+    @GetMapping("/user/fullNameAndTown")
+    public ResponseEntity<List<User>> getUserByFullNameAndTown(@RequestParam String fullName, String town){
+        List <User> userToFind = userService.findUserByFullNameAndAddressTown(fullName,town);
+        return new ResponseEntity<>(userToFind, HttpStatus.OK);
+    }
+
     @PostMapping("/user")
     public ResponseEntity<User> addNewUser(@RequestBody User user){
         User newUser = userService.saveNewUser(user);
