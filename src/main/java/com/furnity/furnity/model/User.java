@@ -1,13 +1,12 @@
 package com.furnity.furnity.model;
 
-import lombok.Data;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Collection;
-import java.util.List;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
@@ -27,9 +26,9 @@ public class User {
     @Column(name = "last_name", nullable = false)
     private String secondName;
 
-    // I will implement OneToOne relationship to address soon.
-    @Column(name = "address_id")
-    private Long addressId;
+    @OneToOne(cascade = CascadeType.ALL)
+    @JoinColumn(name = "address", referencedColumnName = "id")
+    private Address address;
 
     @Column(name = "email", nullable = false)
     private String email;
@@ -44,11 +43,11 @@ public class User {
             inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
 
-    public User( String firstName, String secondName, Long addressId, String email, String password, Collection<Role> roles ) {
+    public User( String firstName, String secondName, Address address, String email, String password, Collection<Role> roles ) {
         super();
         this.firstName = firstName;
         this.secondName = secondName;
-        this.addressId = addressId;
+        this.address = address;
         this.email = email;
         this.password = password;
         this.roles = roles;

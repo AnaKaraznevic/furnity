@@ -1,6 +1,7 @@
 package com.furnity.furnity.web.dto;
 
 
+import com.furnity.furnity.model.Address;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
@@ -12,17 +13,16 @@ public class UserRegistrationDto {
     private String firstName;
     private String lastName;
 
-    private Long addressId;
+    private Address address;
     private String email;
     private String password;
 
-    public UserRegistrationDto(String firstName, String lastName, Long addressId, String email, String password) {
+    public UserRegistrationDto( String firstName, String lastName, Address address, String email, String password ) {
         super();
         this.firstName = firstName;
         this.lastName = lastName;
-        this.addressId = null;
+        this.address = address;
         this.email = email;
         this.password = password;
     }
-
 }
