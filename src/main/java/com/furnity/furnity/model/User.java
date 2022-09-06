@@ -1,16 +1,19 @@
 package com.furnity.furnity.model;
 
-import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.Getter;
 import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import javax.persistence.*;
+import java.util.Collection;
+import java.util.List;
 
 @Entity
 @Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Data
+@Setter
+@Getter
 @NoArgsConstructor
-@AllArgsConstructor
 public class User {
 
     @Id
@@ -25,7 +28,7 @@ public class User {
     private String secondName;
 
     // I will implement OneToOne relationship to address soon.
-    @Column(name = "address_id", nullable = false)
+    @Column(name = "address_id")
     private Long addressId;
 
     @Column(name = "email", nullable = false)
@@ -34,9 +37,20 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "user_role",
+            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
+    private Collection<Role> roles;
 
-    // Impelement code here - can be two choices
-    // 1. private Collection<Role> roles  - in this case it will be an additional table in DB
-    // 2. OR  private Role role  - in this case Role must be Enum
-
+    public User( String firstName, String secondName, Long addressId, String email, String password, Collection<Role> roles ) {
+        super();
+        this.firstName = firstName;
+        this.secondName = secondName;
+        this.addressId = addressId;
+        this.email = email;
+        this.password = password;
+        this.roles = roles;
+    }
 }
