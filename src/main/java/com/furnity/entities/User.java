@@ -5,6 +5,9 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.Lob;
+
+import org.springframework.web.multipart.MultipartFile;
 
 import lombok.Data;
 
@@ -27,6 +30,10 @@ public class User {
 	private String postalcode;
 	private String created;
 	private String updated;
+	@Lob
+	private MultipartFile filename;
+	private String file;
+
 	
 	
 }

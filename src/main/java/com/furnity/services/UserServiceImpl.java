@@ -1,7 +1,16 @@
 package com.furnity.services;
 
+import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.nio.file.StandardCopyOption;
+
+import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.furnity.entities.User;
 import com.furnity.repositories.UserRepositories;
@@ -12,18 +21,51 @@ public class UserServiceImpl implements UserService {
 	@Autowired
 	UserRepositories userrepositories;
 
-	@Override
-	public User findByEmailPass(User user) {
-		// TODO Auto-generated method stub
-		System.out.println(user.getEmail());
-		System.out.println(user.getPass());
-		User user1=userrepositories.findByEmailAndPass(user.getEmail(),user.getPass());
-		return user1;
+	final String UPLOAD_DIR = "F:\\\\accenture\\\\furnity\\\\src\\\\main\\\\resources\\\\static\\\\image";
+	// final String UPLOAD_DIR = new
+	// ClassPathResource("static/image/").getFile().getAbsolutePath();
+
+	public UserServiceImpl() throws IOException {
+		super();
+
 	}
 
 	@Override
-	public User saveUser(User user) {
-		// TODO Auto-generated method stub
+	public User findByEmailPass(User user) {
+		System.out.println(user.getEmail());
+		System.out.println(user.getPass());
+		User user1 = userrepositories.findByEmailAndPass(user.getEmail(), user.getPass());
+		return user1;
+	}
+
+	/*
+	 * @Override public User saveUser(User user) { // TODO Auto-generated method
+	 * stub return userrepositories.save(user); }
+	 */
+
+	@Override
+	public User saveUser(User user, MultipartFile multipartFile) {
+
+		boolean f = false;
+		try {
+			String dem = UPLOAD_DIR + File.separator + File.separator + multipartFile.getOriginalFilename();
+			Files.copy(multipartFile.getInputStream(),
+					Paths.get(UPLOAD_DIR + File.separator + user.getEmail().replace(".", "") + "."
+							+ FilenameUtils.getExtension(multipartFile.getOriginalFilename())),
+					StandardCopyOption.REPLACE_EXISTING);
+			f = true;
+
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+		// If you do not set to null it throws error (MultipartFile cannot be cast to
+		// class java.sql.Blob)
+		user.setFilename(null);
+		user.setFile(user.getEmail().replace(".", "") + "."
+				+ FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
+		// byte[] contents = multipartFile.getBytes();
+		// Blob blob = new SerialBlob(contents);
+		// user.setFilename(multipartFile);
 		return userrepositories.save(user);
 	}
 }

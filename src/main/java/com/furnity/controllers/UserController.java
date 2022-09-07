@@ -5,6 +5,8 @@ import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestParam;
+import org.springframework.web.multipart.MultipartFile;
 
 import com.furnity.entities.User;
 import com.furnity.services.UserService;
@@ -43,14 +45,13 @@ public class UserController {
 		return "add_furniture";
 	}
 
-	
 	@PostMapping(value = "/home")
 	public String home(User user, Model model) {
-	//	System.out.println(user);
-	//	System.out.println(user.getEmail());
+		// System.out.println(user);
+		// System.out.println(user.getEmail());
 		model.addAttribute("user", userservice.findByEmailPass(user));
-		User user1 = userservice.findByEmailPass(user); 
-		//System.out.println("cus.getFname(): " + user);
+		User user1 = userservice.findByEmailPass(user);
+		// System.out.println("cus.getFname(): " + user);
 		if (user1 != null) {
 			System.out.println("not null: customer ");
 			return "home";
@@ -59,13 +60,30 @@ public class UserController {
 			return "login";
 		}
 	}
-	
+
+	/*
+	 * @PostMapping(value = "/register") public String register(User user, Model
+	 * model) { System.out.println(user); System.out.println(user.getEmail());
+	 * model.addAttribute("user", userservice.saveUser(user)); User user1 =
+	 * userservice.saveUser(user); return "login";
+	 * 
+	 * }
+	 */
+
 	@PostMapping(value = "/register")
-	public String register(User user, Model model) {
-		System.out.println(user);
-		System.out.println(user.getEmail());
-		model.addAttribute("user", userservice.saveUser(user));
-		User user1 = userservice.saveUser(user); 	
+	public String register(User user, @RequestParam("filename") MultipartFile multipartFile) {
+
+		/*
+		 * System.out.println(multipartFile.getOriginalFilename());
+		 * System.out.println(multipartFile.getResource());
+		 * System.out.println(multipartFile.getContentType());
+		 * System.out.println(user.getFilename());
+		 */
+		User user1 = userservice.saveUser(user, multipartFile);
+		if (multipartFile.isEmpty()) {
+			return "home";
+		}
+		
 		return "login";
 
 	}

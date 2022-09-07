@@ -16,11 +16,11 @@
 					<div class="login_part_form">
 						<div class="login_part_form_iner">
 							<h3>
-								Welcome To Furnity To Donate Furniture! <br />
-								<br /> Please Register here
+								Welcome To Furnity To Donate Furniture! <br /> <br /> Please
+								Register here
 							</h3>
 							<form class="row contact_form" th:object="${User}"
-								th:action="@{/register}" method="post">
+								th:action="@{/register}" method="post" enctype="multipart/form-data">
 								<div class="col-md-12 form-group p_star">
 									<input type="text" class="form-control" id="name" name="fname"
 										value="" placeholder="First Nama" />
@@ -55,12 +55,17 @@
 										value="" placeholder="City" />
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="name" name="country"
-										value="" placeholder="Country" />
+									<input type="text" class="form-control" id="name"
+										name="country" value="" placeholder="Country" />
 								</div>
 								<div class="col-md-12 form-group p_star">
-									<input type="text" class="form-control" id="name" name="postalcode"
-										value="" placeholder="Postal code" />
+									<input type="text" class="form-control" id="name"
+										name="postalcode" value="" placeholder="Postal code" />
+								</div>
+								<div class="col-md-12 form-group p_star">
+									<label for="furniture_photo">Upload Furniture Photo</label> <input
+										type="file" class="form-control" id="furniture_photo"
+										name="filename" accept="image/png, image/jpeg" />
 								</div>
 								<div class="col-md-12 form-group">
 									<button type="submit" value="submit" class="btn_3">
