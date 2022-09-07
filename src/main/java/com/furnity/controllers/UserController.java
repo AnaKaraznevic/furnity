@@ -73,6 +73,17 @@ public class UserController {
 	@PostMapping(value = "/register")
 	public String register(User user, @RequestParam("filename") MultipartFile multipartFile) {
 
+		if (multipartFile.isEmpty()) {
+			System.out.println("empty filename");
+			return "home";
+		}
+
+		if (!((multipartFile.getContentType().equals("image/jpeg"))
+				|| (multipartFile.getContentType().equals("image/png")))) {
+			System.out.println("Only jpeg and PNG file allowed");
+			return "home";
+		}
+
 		/*
 		 * System.out.println(multipartFile.getOriginalFilename());
 		 * System.out.println(multipartFile.getResource());
@@ -80,12 +91,13 @@ public class UserController {
 		 * System.out.println(user.getFilename());
 		 */
 		User user1 = userservice.saveUser(user, multipartFile);
-		if (multipartFile.isEmpty()) {
+		if (user1 != null) {
+			System.out.println("inserted");
+			return "login";
+		} else {
+			System.out.println("not inserted");
 			return "home";
 		}
-		
-		return "login";
 
 	}
-
 }

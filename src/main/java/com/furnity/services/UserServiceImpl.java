@@ -8,7 +8,6 @@ import java.nio.file.StandardCopyOption;
 
 import org.apache.commons.io.FilenameUtils;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.core.io.ClassPathResource;
 import org.springframework.stereotype.Service;
 import org.springframework.web.multipart.MultipartFile;
 
@@ -46,26 +45,33 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public User saveUser(User user, MultipartFile multipartFile) {
 
-		boolean f = false;
+		boolean isPhotoInserted = false;
 		try {
-			String dem = UPLOAD_DIR + File.separator + File.separator + multipartFile.getOriginalFilename();
+			
 			Files.copy(multipartFile.getInputStream(),
 					Paths.get(UPLOAD_DIR + File.separator + user.getEmail().replace(".", "") + "."
 							+ FilenameUtils.getExtension(multipartFile.getOriginalFilename())),
 					StandardCopyOption.REPLACE_EXISTING);
-			f = true;
+			isPhotoInserted = true;
 
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
-		// If you do not set to null it throws error (MultipartFile cannot be cast to
-		// class java.sql.Blob)
-		user.setFilename(null);
-		user.setFile(user.getEmail().replace(".", "") + "."
-				+ FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
-		// byte[] contents = multipartFile.getBytes();
-		// Blob blob = new SerialBlob(contents);
-		// user.setFilename(multipartFile);
-		return userrepositories.save(user);
+		
+		if (isPhotoInserted) {
+			// If you do not set to null it throws error (MultipartFile cannot be cast to
+			// class java.sql.Blob)
+			user.setFilename(null);
+			user.setFile(user.getEmail().replace(".", "") + "."
+					+ FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
+			// byte[] contents = multipartFile.getBytes();
+			// Blob blob = new SerialBlob(contents);
+			// user.setFilename(multipartFile);
+			return userrepositories.save(user);
+		}
+		else return null;
+
+		
+		
 	}
 }
