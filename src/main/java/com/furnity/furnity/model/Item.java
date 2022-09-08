@@ -14,7 +14,7 @@ import javax.persistence.*;
 public class Item {
     @Id
     @Column(name = "id", unique = true, nullable = false, updatable = false)
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
 
     @ManyToOne
@@ -22,8 +22,8 @@ public class Item {
     private Category category;
 
 
-   // @Column(name = "user_id")
-   // private User userId;
+    @Column(name = "user_id")
+    private User userId;
 
     @Column(name = "name")
     private String name;
