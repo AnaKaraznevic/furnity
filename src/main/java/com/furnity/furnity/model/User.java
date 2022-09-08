@@ -1,21 +1,23 @@
 package com.furnity.furnity.model;
 
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.*;
+import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.context.SecurityContext;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
 import java.util.ArrayList;
 import java.util.Collection;
+import java.util.HashSet;
+import java.util.Set;
 
 @Entity
-@Table(name = "user", uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-@Setter
-@Getter
+@Table(name = "user")
+@Data
 @NoArgsConstructor
-public class User {
+@AllArgsConstructor
+public class User implements UserDetails {
 
     @Id
     @Column(name = "id", unique = true, nullable = false, updatable = false)
@@ -32,26 +34,46 @@ public class User {
     @JoinColumn(name = "address", referencedColumnName = "id")
     private Address address;
 
-    @Column(name = "email", nullable = false)
+    @Column(name = "email", unique = true)
     private String email;
 
     @Column(name = "password", nullable = false)
     private String password;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
-    @JoinTable(
-            name = "user_role",
-            joinColumns = @JoinColumn(name = "user_id", referencedColumnName = "id"),
-            inverseJoinColumns = @JoinColumn(name = "role_id", referencedColumnName = "id"))
-    private Collection<Role> roles;
+    @Enumerated(EnumType.STRING)
+    @ElementCollection(targetClass = Role.class, fetch = FetchType.EAGER)
+    @CollectionTable(name = "roles")
+    private Set<Role> roles = new HashSet<>();
 
-    public User( String firstName, String secondName, Address address, String email, String password, Collection<Role> roles ) {
-        super();
-        this.firstName = firstName;
-        this.secondName = secondName;
-        this.address = address;
-        this.email = email;
-        this.password = password;
-        this.roles = roles;
+
+    @Override
+    public Collection<? extends GrantedAuthority> getAuthorities() {
+        return getRoles();
+    }
+
+    @Override
+    public String getUsername() {
+        return email;
+    }
+
+
+    @Override
+    public boolean isAccountNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isAccountNonLocked() {
+        return true;
+    }
+
+    @Override
+    public boolean isCredentialsNonExpired() {
+        return true;
+    }
+
+    @Override
+    public boolean isEnabled() {
+        return true;
     }
 }
