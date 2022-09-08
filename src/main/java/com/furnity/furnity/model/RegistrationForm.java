@@ -23,4 +23,5 @@ public class RegistrationForm {
         user.setRoles(Collections.singleton(Role.USER));
         return user;
     }
+
 }

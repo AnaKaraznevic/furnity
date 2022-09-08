@@ -15,7 +15,7 @@ public class HomePageController {
     @GetMapping
     public String index( @AuthenticationPrincipal User user, Model model) {
         if(user != null){
-            model.addAttribute("user", user.getEmail());  // ??????? or getUserName ?
+            model.addAttribute("user", user.getUsername());  // ??????? or email ?
             return "index";
         }
 

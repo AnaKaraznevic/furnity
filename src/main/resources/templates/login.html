@@ -1,5 +1,7 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
     <meta charset="UTF-8">
@@ -9,10 +11,19 @@
 <body>
 
     <h2>Login Page</h2>
-    <form th:action="@{/login}" method="post">
-        Username/ Email <input type="text" name="email"/>
-        Password        <input type="text" name="password"/>
+
+    <form method="post" th:action="@{/login}">
+
+        Username/ Email <label>
+                            <input type="text" name="email"/>
+                        </label>
+
+        Password <label>
+                    <input type="text" name="password"/>
+                </label>
+
         <input type="submit" value="login">
+
     </form>
 </body>
 
