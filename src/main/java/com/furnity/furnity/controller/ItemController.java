@@ -8,7 +8,10 @@ import com.furnity.furnity.service.ItemService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestMapping;
 
 import java.util.List;
 
@@ -22,20 +25,20 @@ public class ItemController {
     private final CategoryService categoryService;
 
 
-    public ItemController( ItemService itemService, CategoryService categoryService ) {
+    public ItemController(ItemService itemService, CategoryService categoryService) {
         this.itemService = itemService;
         this.categoryService = categoryService;
     }
 
-    @GetMapping("/item")
-    public String itemsList(Model model){
-        List<Item> itemList = itemService.findAllItems();
-        model.addAttribute("itemList" , itemList);
-        return "item_list";
-    }
+//    @GetMapping("/item")
+//    public String itemsList(Model model){
+//        List<Item> itemList = itemService.findAllItems();
+//        model.addAttribute("itemList" , itemList);
+//        return "item_list";
+//    }
 
     @GetMapping("/item/new")
-    public String showNewItemForm(Model model){
+    public String showNewItemForm(Model model) {
         List<Category> categoryList = categoryService.findAllCategories();
         model.addAttribute("item", new Item());
         model.addAttribute("categoryList", categoryList);
@@ -43,24 +46,37 @@ public class ItemController {
     }
 
     @PostMapping("/item/save")
-    public String saveNewItem(Item item){
+    public String saveNewItem(Item item) {
         itemService.addItem(item);
         return "redirect:/item";
     }
 
     @GetMapping("/item/delete/{id}")
-    public String deletePro(@PathVariable("id") Long id){
+    public String deletePro(@PathVariable("id") Long id) {
         this.itemService.deleteItem(id);
         return "redirect:/item";
     }
 
     @GetMapping("/item/edit/{id}")
-    public String editItem(@PathVariable (value = "id") Long id, Model model){
+    public String editItem(@PathVariable(value = "id") Long id, Model model) {
         List<Category> categoryList = categoryService.findAllCategories();
         model.addAttribute("categoryList", categoryList);
         Item item = itemService.findItemById(id);
         model.addAttribute("item", item);
         System.out.println(item);
         return "item_form";
+    }
+
+    @RequestMapping(path = {"/item"})
+    public String search(Model model, String keyword) {
+        if (keyword != null) {
+            List<Item> itemList = itemService.findItemsByKeyword(keyword);
+            model.addAttribute("itemList", itemList);
+        } else {
+            List<Item> itemList = itemService.findAllItems();
+            model.addAttribute("itemList", itemList);
+
+        }
+        return "item_list";
     }
 }

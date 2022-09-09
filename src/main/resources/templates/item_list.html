@@ -10,6 +10,13 @@
 <body>
 <div class="container text-center">
     <div><h1>Item List</h1></div>
+
+    <form th:action="@{/item}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ...." size="50" >
+        <button type="submit" class="btn btn-info" >Search</button>
+    </form>
+
+
     <table class="table table-bordered">
         <thead class="thead">
         <tr>
@@ -19,6 +26,9 @@
             <th scope="col">Description</th>
             <th scope="col">Price</th>
             <th scope="col">Condition</th>
+            <th scope="col">Color</th>
+            <th scope="col">Material</th>
+            <th scope="col">Style</th>
         </tr>
         </thead>
         <tbody>
@@ -30,6 +40,9 @@
                 <td>[[${item.description}]]</td>
                 <td>[[${item.price}]]</td>
                 <td>[[${item.itemCondition}]]</td>
+                <td>[[${item.itemColor}]]</td>
+                <td>[[${item.itemMaterial}]]</td>
+                <td>[[${item.itemStyle}]]</td>
                 <td>
                     <a th:href="@{'/item/edit/' + ${item.id}}">EDIT</a>
                     &nbsp;
