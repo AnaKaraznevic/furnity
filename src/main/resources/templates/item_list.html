@@ -21,6 +21,7 @@
         <thead class="thead">
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Item Image</th>
             <th scope="col">Category</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
@@ -35,6 +36,7 @@
         <th:block th:each="item : ${itemList}">
             <tr>
                 <td>[[${item.id}]]</td>
+                <td><img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"></td>
                 <td>[[${item.category}]]</td>
                 <td>[[${item.name}]]</td>
                 <td>[[${item.description}]]</td>
