@@ -28,7 +28,7 @@ public class HomePageController {
         return "login";
     }
 
-    @PreAuthorize(value = "hasAuthority('ADMIN') or hasAuthority('USER')")
+    @PreAuthorize(value = "hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/user")
     public String user(){
         return "user";

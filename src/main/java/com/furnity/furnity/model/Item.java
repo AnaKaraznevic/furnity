@@ -23,7 +23,7 @@ public class Item {
 
 
     @Column(name = "user_id")
-    private User userId;
+    private User userId;  // ?????????
 
     @Column(name = "name")
     private String name;
