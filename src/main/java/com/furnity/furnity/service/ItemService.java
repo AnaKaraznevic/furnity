@@ -43,10 +43,6 @@ public class ItemService {
 							+ FilenameUtils.getExtension(multipartFile.getOriginalFilename())),
 					StandardCopyOption.REPLACE_EXISTING);
 			isPhotoInserted = true;
-			String filename = UPLOAD_DIR + File.separator + item.getName().replace(".", "") + "_"
-					+ timeStamp.replace(".", "") + "."
-					+ FilenameUtils.getExtension(multipartFile.getOriginalFilename());
-			System.out.println("filename=" + filename);
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
@@ -54,8 +50,7 @@ public class ItemService {
 		if (isPhotoInserted) {
 
 			item.setFilename(null);
-			item.setFile(
-					UPLOAD_DIR + File.separator + item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
+			item.setFile(item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
 							+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
 			return itemRepository.save(item);
 		} else
