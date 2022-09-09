@@ -28,6 +28,6 @@ public class RegistrationController {
     public String registrationProcess( RegistrationForm form ){
 
         userRepository.save(form.toUser(passwordEncoder));
-        return "redirect:/login";
+        return "redirect:/login2";
     }
 }
