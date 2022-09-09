@@ -21,13 +21,13 @@ public class RegistrationController {
 
     @GetMapping
     public String registration(){
-        return "registration2";
+        return "registration";
     }
 
     @PostMapping
     public String registrationProcess( RegistrationForm form ){
 
         userRepository.save(form.toUser(passwordEncoder));
-        return "redirect:/login2";
+        return "redirect:/login";
     }
 }

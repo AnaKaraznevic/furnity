@@ -16,28 +16,28 @@ public class HomePageController {
     public String index( @AuthenticationPrincipal User user, Model model) {
         if(user != null){
             model.addAttribute("user", user.getUsername());  // ??????? or email ?
-            return "index2";
+            return "index";
         }
 
         model.addAttribute("user", "anonymous");
-        return "index2";
+        return "index";
     }
 
     @GetMapping("/login")
     public String login(){
-        return "login2";
+        return "login";
     }
 
     @PreAuthorize(value = "hasAuthority('USER') or hasAuthority('ADMIN')")
     @GetMapping("/user")
     public String user(){
-        return "user2";
+        return "user";
     }
 
     @PreAuthorize(value = "hasAuthority('ADMIN')")
     @GetMapping("/admin")
         public String admin(){
-            return "admin2";
+            return "admin";
         }
 
     }
