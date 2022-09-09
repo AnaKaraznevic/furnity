@@ -17,11 +17,9 @@ public class Item {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-
     @ManyToOne
     @JoinColumn(name = "category_id")
     private Category category;
-
 
    // @Column(name = "user_id")
    // private User userId;
@@ -29,15 +27,31 @@ public class Item {
     @Column(name = "name")
     private String name;
 
-
     @Column(name = "description")
     private String description;
 
     @Column(name = "price")
     private Double price;
 
-
     @Column(name = "item_condition")
-    private String itemCondition;
+    @Enumerated(EnumType.STRING)
+    private ItemCondition itemCondition;
 
+    @Column(name = "item_color")
+    @Enumerated(EnumType.STRING)
+    private ItemColor itemColor;
+
+    @Column(name = "item_material")
+    @Enumerated(EnumType.STRING)
+    private ItemMaterial itemMaterial;
+
+    @Column(name = "item_style")
+    @Enumerated(EnumType.STRING)
+    private ItemStyle itemStyle;
+
+
+    public enum ItemCondition {New, Good, Poor};
+    public enum ItemColor {Black, White, Red, Blue, Green, Brown, Grey, Pink, Purple};
+    public enum ItemMaterial {Glass, Metal, Wooden, Plastic}
+    public enum ItemStyle {Modern, Country, Rustic, Classic}
 }

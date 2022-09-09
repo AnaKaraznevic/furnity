@@ -5,5 +5,5 @@ import com.furnity.furnity.web.dto.UserRegistrationDto;
 import org.springframework.security.core.userdetails.UserDetailsService;
 
 public interface UserService extends UserDetailsService {
-    User saveNewUser( UserRegistrationDto registrationDto);
+    User saveNewUser(UserRegistrationDto registrationDto);
 }

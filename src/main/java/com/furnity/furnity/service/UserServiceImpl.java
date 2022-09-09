@@ -32,7 +32,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User saveNewUser( UserRegistrationDto registrationDto) {
+    public User saveNewUser(UserRegistrationDto registrationDto) {
         User user = new User(registrationDto.getFirstName(),
                 registrationDto.getLastName(), registrationDto.getAddressId(), registrationDto.getEmail(),
                 passwordEncoder.encode(registrationDto.getPassword()), Arrays.asList(new Role("USER_ROLE")));
@@ -41,16 +41,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public UserDetails loadUserByUsername( String username) throws UsernameNotFoundException {
+    public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
 
         User user = userRepository.findByEmail(username);
-        if(user == null) {
+        if (user == null) {
             throw new UsernameNotFoundException("Invalid username or password.");
         }
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), mapRolesToAuthorities(user.getRoles()));
     }
 
-    private Collection<? extends GrantedAuthority> mapRolesToAuthorities( Collection<Role> roles){
+    private Collection<? extends GrantedAuthority> mapRolesToAuthorities(Collection<Role> roles) {
         return roles.stream().map(role -> new SimpleGrantedAuthority(role.getRoleName())).collect(Collectors.toList());
     }
 }
