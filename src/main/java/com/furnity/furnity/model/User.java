@@ -1,5 +1,6 @@
 package com.furnity.furnity.model;
 
+import com.furnity.furnity.enums.Role;
 import lombok.*;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;

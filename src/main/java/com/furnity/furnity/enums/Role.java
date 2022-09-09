@@ -1,4 +1,4 @@
-package com.furnity.furnity.model;
+package com.furnity.furnity.enums;
 
 import org.springframework.security.core.GrantedAuthority;
 

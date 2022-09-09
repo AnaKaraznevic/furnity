@@ -1,5 +1,6 @@
 package com.furnity.furnity.model;
 
+import com.furnity.furnity.enums.Role;
 import lombok.Data;
 import org.springframework.security.crypto.password.PasswordEncoder;
 
