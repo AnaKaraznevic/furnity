@@ -19,6 +19,7 @@ import com.furnity.furnity.exception.ItemNotFoundException;
 import com.furnity.furnity.model.Item;
 import com.furnity.furnity.repository.ItemRepository;
 
+
 @Service
 @Transactional
 public class ItemService {
