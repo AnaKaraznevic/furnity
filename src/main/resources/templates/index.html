@@ -4,24 +4,31 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Index Page</title>
+  <meta charset="UTF-8">
+  <title>Furnity Home</title>
+  <link rel="stylesheet" href="../static/index.css">
 </head>
 
-<body>
+<body class="index-body">
 
-<p th:text="${user}"></p>
+  <nav class="index-nav">
+    <div class="furnity-logo">
+      <img src="../static/furnity-final-logo.png" >
+    </div>
 
-<form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
-    <input type="submit" value="logout">
-</form>
+    <p th:text="${user}"></p>
 
-<h2>Index Page</h2>
+    <form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
+      <input type="submit" value="logout">
+    </form>
 
-<a th:href="@{/login}">Login Page</a> <br>
-<a th:href="@{/registration}">Registration Page</a> <br>
-<a th:href="@{/user}">User Page</a> <br>
-<a th:href="@{/admin}">Admin Page</a> <br>
+    <ul>
+      <li> <a href="http://localhost:8080">Home</a> </li>
+      <li> <a href="http://localhost:8080/login" >Login</a> </li>
+      <li> <a href="http://localhost:8080/registration" >Register/SignUp</a> </li>
+      <li> <a href="#" >Contact</a> </li>
+    </ul>
+  </nav>
 
 </body>
 
