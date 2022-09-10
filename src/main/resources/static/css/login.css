@@ -3,17 +3,17 @@
     padding: 0;
 }
 
-.registration-body{
+.login-body{
     width: 100%;
     height: 100vh;
-    background-image: url(furnity-registration-background.jpeg);
+    background-image: url(../img/furnity-login-background.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: center;
     align-items: center;
 }
 
-.registration-nav {
+.login-nav {
     width: 100%;
     background-color: rgba(0,0,0,0.7);
     overflow: hidden;
@@ -45,12 +45,12 @@ nav ul li a{
 
 }
 
-.registration-form{
+.login-form{
     margin-top: 170px;
     text-align: center;
 }
 
-.registration-input{
+.login-input{
     display: block;
     width: 350px;
     height: 40px;
@@ -64,7 +64,7 @@ nav ul li a{
 
 }
 
-.registration-button{
+.login-button{
     width: 350px;
     height: 40px;
     font-size: 20px;
@@ -74,7 +74,7 @@ nav ul li a{
     margin-top: 40px;
 }
 
-.registration-h1{
+.login-h1{
     margin-bottom: 30px;
     color: #db5c00;
 }

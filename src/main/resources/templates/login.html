@@ -6,14 +6,15 @@
 <head>
     <meta charset="UTF-8">
     <title>Furnity - Login</title>
-    <link rel="stylesheet" href="../static/login.css">
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/css/login.css" th:href="@{/css/login.css}" />
 </head>
 
 <body class="login-body">
 
 <nav class="login-nav">
     <div class="furnity-logo">
-        <img src="../static/furnity-final-logo.png" >
+        <img th:src="@{/img/furnity-final-logo.png}">
     </div>
     <ul>
         <li> <a href="http://localhost:8080">Home</a> </li>
