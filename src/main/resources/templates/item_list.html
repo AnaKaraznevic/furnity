@@ -10,26 +10,41 @@
 <body>
 <div class="container text-center">
     <div><h1>Item List</h1></div>
+
+    <form th:action="@{/item}" method="get">
+        <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ...." size="50" >
+        <button type="submit" class="btn btn-info" >Search</button>
+    </form>
+
+
     <table class="table table-bordered">
         <thead class="thead">
         <tr>
             <th scope="col">ID</th>
+            <th scope="col">Item Image</th>
             <th scope="col">Category</th>
             <th scope="col">Name</th>
             <th scope="col">Description</th>
             <th scope="col">Price</th>
             <th scope="col">Condition</th>
+            <th scope="col">Color</th>
+            <th scope="col">Material</th>
+            <th scope="col">Style</th>
         </tr>
         </thead>
         <tbody>
         <th:block th:each="item : ${itemList}">
             <tr>
                 <td>[[${item.id}]]</td>
+                <td><img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"></td>
                 <td>[[${item.category}]]</td>
                 <td>[[${item.name}]]</td>
                 <td>[[${item.description}]]</td>
                 <td>[[${item.price}]]</td>
                 <td>[[${item.itemCondition}]]</td>
+                <td>[[${item.itemColor}]]</td>
+                <td>[[${item.itemMaterial}]]</td>
+                <td>[[${item.itemStyle}]]</td>
                 <td>
                     <a th:href="@{'/item/edit/' + ${item.id}}">EDIT</a>
                     &nbsp;

@@ -1,5 +1,6 @@
 package com.furnity.furnity.service;
 
+
 import java.util.HashSet;
 import java.util.Set;
 
@@ -20,10 +21,12 @@ import com.furnity.furnity.repository.UserRepository;
 
 @Service
 public class UserDetailsServiceImpl implements UserDetailsService{
+
     @Autowired
     private UserRepository userRepository;
 
     @Override
+
     @Transactional(readOnly = true)
     public UserDetails loadUserByUsername(String username) {
         User user = userRepository.findByEmail(username);
@@ -35,5 +38,7 @@ public class UserDetailsServiceImpl implements UserDetailsService{
         }
 
         return new org.springframework.security.core.userdetails.User(user.getEmail(), user.getPassword(), grantedAuthorities);
+
+
     }
 }

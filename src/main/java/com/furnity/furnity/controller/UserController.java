@@ -117,7 +117,7 @@ public class UserController {
 		// securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
 
 		// return "redirect:/welcome";
-		return "home";
+		return "login";
 	}
 
 	@GetMapping(value = "/add_furniture")

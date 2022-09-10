@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Index Page</title>
+</head>
+
+<body>
+
+<p th:text="${user}"></p>
+
+<form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
+    <input type="submit" value="logout">
+</form>
+
+<h2>Index Page</h2>
+
+<a th:href="@{/login}">Login Page</a> <br>
+<a th:href="@{/registration}">Registration Page</a> <br>
+<a th:href="@{/user}">User Page</a> <br>
+<a th:href="@{/admin}">Admin Page</a> <br>
+
+</body>
+
+</html>

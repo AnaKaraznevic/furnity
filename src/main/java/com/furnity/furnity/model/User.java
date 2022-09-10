@@ -1,5 +1,6 @@
 package com.furnity.furnity.model;
 
+
 import java.util.Set;
 
 import javax.persistence.CascadeType;
@@ -17,12 +18,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+
 @Entity
 @Table(name = "user")
 @Data
 @NoArgsConstructor
 @AllArgsConstructor
+
 public class User {
+
 
     @Id
     @Column(name = "id", unique = true, nullable = false, updatable = false)
@@ -44,9 +48,12 @@ public class User {
 
     @Column(name = "password", nullable = false)
     private String password;
+
     
     @ManyToMany
     private Set<Role> roles;
+
+
 
 	/*
 	 * @Enumerated(EnumType.STRING)
@@ -55,21 +62,11 @@ public class User {
 	 * 
 	 * @CollectionTable(name = "roles") private Set<Role> roles = new HashSet<>();
 	 */
-
-
+    
 	/*
 	 * @Override public Collection<? extends GrantedAuthority> getAuthorities() {
 	 * return getRoles(); }
 	 */
-	/*
-	 * @Override public String getUsername() { return email; }
-	 * 
-	 * @Override public boolean isAccountNonExpired() { return true; }
-	 * 
-	 * @Override public boolean isAccountNonLocked() { return true; }
-	 * 
-	 * @Override public boolean isCredentialsNonExpired() { return true; }
-	 * 
-	 * @Override public boolean isEnabled() { return true; }
-	 */
+
+
 }
