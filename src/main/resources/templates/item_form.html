@@ -1,117 +1,112 @@
 <!DOCTYPE html>
-<html lang="en" xmlns:th="http://www.thymeleaf.org">
-<head>
-<meta charset="UTF-8">
-<title>Create New Item</title>
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0/dist/css/bootstrap.min.css"
-	rel="stylesheet"
-	integrity="sha384-gH2yIJqKdNHPEq0n4Mqa/HGKIhSkIHeL5AyhkYV8i59U5AR6csBvApHHNl/vI1Bx"
-	crossorigin="anonymous" />
-
+<html lang="zxx">
+<head th:replace="fragments/fragments :: html_head">
 </head>
 <body>
-	<div class="container text-center">
-		<div>
-			<h1>Create New Item</h1>
+	<!--::header part start::-->
+	<div th:replace="fragments/fragments :: html_header"></div>
+	<!-- Header part end-->
+	<!--================add_furniture Area =================-->
+	<section class="custom_container padding_top">
+		<div class="container">
+			<div class="row align-items-center">
+				<div class="col-lg-12 col-md-12">
+					<div class="custom_container_form">
+						<div class="custom_container_form_inner">
+							<h1>Welcome To Furnity To Donate Furniture!</h1>
+							<h3>Please Add Furniture Details Below To Donate:</h3>
+							<form class="row contact_form" th:action="@{/item/save}"
+								method="POST" th:object="${item}" novalidate="novalidate"
+								enctype="multipart/form-data">
+
+								<div class="col-md-12 form-group p_star">
+								<label>Item Category: </label>
+									<select th:field="*{category}" class="form-control " required>
+										<th:block th:each="cat : ${categoryList}">
+											<option th:text="${cat.name}" th:value="${cat.id}" />
+										</th:block>
+									</select>
+								</div>
+								<div class="col-md-12 form-group p_star">
+                                      <label>Item Name: </label>
+									<input type="text" th:field="*{name}" class="form-control"
+										placeholder="Furniture Name" required />
+								</div>
+
+								<div class="col-md-12 form-group p_star">
+								<label>Item description: </label>
+									<input type="text" th:field="*{description}"
+										class="form-control" placeholder="Furniture Description"
+										required />
+								</div>
+								<div class="col-md-12 form-group p_star">
+								<label>Item price: </label>
+									<input type="number" th:field="*{price}" class="form-control"
+										placeholder="Furniture Price" required />
+								</div>
+								<div class="col-md-12 form-group p_star">
+								<label >Item Condition:</label>
+									<select th:field="*{itemCondition}" class="form-control"
+										required>
+										<option
+											th:each="cond: ${T(com.furnity.furnity.model.Item.ItemCondition).values()}"
+											th:value="${cond}" th:text="${cond}"></option>
+									</select>
+								</div>
+
+								<div class="col-md-12 form-group p_star">
+								<label >Item Color:</label>
+									<select th:field="*{itemColor}" class="form-control" required>
+										<option
+											th:each="itemColor : ${T(com.furnity.furnity.model.Item.ItemColor).values()}"
+											th:value="${itemColor}" th:text="${itemColor}"></option>
+									</select>
+								</div>
+								<div class="col-md-12 form-group p_star">
+								<label >Item Material:</label>
+									<select th:field="*{itemMaterial}" class="form-control"
+										required>
+										<option
+											th:each="materialOpt : ${T(com.furnity.furnity.model.Item.ItemMaterial).values()}"
+											th:value="${materialOpt}" th:text="${materialOpt}"></option>
+									</select>
+								</div>
+								<div class="col-md-12 form-group p_star">
+								<label >Item Style:</label>
+									<select th:field="*{itemStyle}" class="form-control" required>
+										<option
+											th:each="styleOpt : ${T(com.furnity.furnity.model.Item.ItemStyle).values()}"
+											th:value="${styleOpt}" th:text="${styleOpt}"></option>
+									</select>
+								</div>
+								<div class="col-md-12 form-group p_star">
+
+									<label for="furniture_photo">Upload Furniture Photo</label> <input
+										type="file" class="form-control" id="furniture_photo"
+										accept="image/png, image/jpeg" name="filename" />
+
+								</div>
+
+								<div class="col-md-12 form-group">
+									<input type="hidden" name="id" th:field="*{id}" />
+									<button type="submit" value="submit" class="btn_3">
+										Add Furniture</button>
+								</div>
+							</form>
+						</div>
+					</div>
+				</div>
+			</div>
 		</div>
+	</section>
+	<!--================add_furniture end =================-->
 
-		<form th:action="@{/item/save}" method="POST" th:object="${item}"
-			style="max-width: 600px; margin: 0 auto"  enctype="multipart/form-data">
 
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item Category : </label>
-				<div class="col-sm-8">
-					<select th:field="*{category}" class="form-control" required>
-						<th:block th:each="cat : ${categoryList}">
-							<option th:text="${cat.name}" th:value="${cat.id}" />
-						</th:block>
-					</select>
-				</div>
-			</div>
 
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item Name: </label>
-				<div class="col-sm-8">
-					<input type="text" th:field="*{name}" class="form-control" required />
-				</div>
-			</div>
+	<!--::footer_part start::-->
+	<div th:replace="fragments/fragments :: html_footer"></div>
+	<!--::footer_part end::-->
 
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item description: </label>
-				<div class="col-sm-8">
-					<input type="text" th:field="*{description}" class="form-control"
-						required />
-				</div>
-			</div>
 
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item price: </label>
-				<div class="col-sm-8">
-					<input type="number" th:field="*{price}" class="form-control"
-						required />
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item Condition : </label>
-				<div class="col-sm-8">
-					<select th:field="*{itemCondition}" class="form-control" required>
-						<option
-							th:each="cond: ${T(com.furnity.furnity.model.Item.ItemCondition).values()}"
-							th:value="${cond}" th:text="${cond}"></option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item Color : </label>
-				<div class="col-sm-8">
-					<select th:field="*{itemColor}" class="form-control" required>
-						<option
-							th:each="itemColor : ${T(com.furnity.furnity.model.Item.ItemColor).values()}"
-							th:value="${itemColor}" th:text="${itemColor}"></option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item Material : </label>
-				<div class="col-sm-8">
-					<select th:field="*{itemMaterial}" class="form-control" required>
-						<option
-							th:each="materialOpt : ${T(com.furnity.furnity.model.Item.ItemMaterial).values()}"
-							th:value="${materialOpt}" th:text="${materialOpt}"></option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label class="col-form-label col-sm-4">Item Style : </label>
-				<div class="col-sm-8">
-					<select th:field="*{itemStyle}" class="form-control" required>
-						<option
-							th:each="styleOpt : ${T(com.furnity.furnity.model.Item.ItemStyle).values()}"
-							th:value="${styleOpt}" th:text="${styleOpt}"></option>
-					</select>
-				</div>
-			</div>
-
-			<div class="form-group row">
-				<label for="furniture_photo" class="col-form-label col-sm-4">Upload Furniture
-					Photo : </label>
-				<div class="col-sm-8">
-					<input type="file" class="form-control" id="furniture_photo"
-						name="filename" accept="image/png, image/jpeg" />
-				</div>
-			</div>
-
-			<div class="text-center p-3">
-				<input type="hidden" name="id" th:field="*{id}" />
-				<button type="submit" class="btn btn-primary">SAVE</button>
-			</div>
-
-		</form>
-	</div>
 </body>
 </html>

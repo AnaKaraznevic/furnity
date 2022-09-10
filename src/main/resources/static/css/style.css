@@ -4585,14 +4585,33 @@ ul {
   margin-bottom: 20px;
 }
 
+.custom_select
+{
+	display: block;
+  width: 100%;
+  background: #ecfdff;
+  border: 1px solid #ecfdff;
+  height: 40px;
+  margin-bottom: 20px;
+  
+}
 /* line 1279, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
 .cart_inner .table tbody tr.shipping_area .shipping_box .shipping_select .list {
+  width: 100%;
+  border-radius: 0px;
+}
+.custom_select .list {
   width: 100%;
   border-radius: 0px;
 }
 
 /* line 1283, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product.scss */
 .cart_inner .table tbody tr.shipping_area .shipping_box .shipping_select .list li {
+  font-size: 14px;
+  font-weight: normal;
+  color: #797979;
+}
+.custom_select .list li {
   font-size: 14px;
   font-weight: normal;
   color: #797979;

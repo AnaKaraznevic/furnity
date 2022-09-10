@@ -6,24 +6,28 @@
 <meta name="viewport"
 	content="width=device-width, initial-scale=1, shrink-to-fit=no" />
 <title>Furnity - Used Furniture</title>
-<link rel="icon" href="img/favicon.png" />
+<link rel="icon" href="http://localhost:8080/img/favicon.png" />
 <!-- Bootstrap CSS -->
-<link rel="stylesheet" href="css/bootstrap.min.css" />
+<link rel="stylesheet"
+	href="http://localhost:8080/css/bootstrap.min.css" />
 <!-- animate CSS -->
-<link rel="stylesheet" href="css/animate.css" />
+<link rel="stylesheet" href="http://localhost:8080/css/animate.css" />
 <!-- owl carousel CSS -->
-<link rel="stylesheet" href="css/owl.carousel.min.css" />
+<link rel="stylesheet"
+	href="http://localhost:8080/css/owl.carousel.min.css" />
 <!-- font awesome CSS -->
-<link rel="stylesheet" href="css/all.css" />
+<link rel="stylesheet" href="http://localhost:8080/css/all.css" />
 <!-- flaticon CSS -->
-<link rel="stylesheet" href="css/flaticon.css" />
-<link rel="stylesheet" href="css/themify-icons.css" />
+<link rel="stylesheet" href="http://localhost:8080/css/flaticon.css" />
+<link rel="stylesheet"
+	href="http://localhost:8080/css/themify-icons.css" />
 <!-- font awesome CSS -->
-<link rel="stylesheet" href="css/magnific-popup.css" />
+<link rel="stylesheet"
+	href="http://localhost:8080/css/magnific-popup.css" />
 <!-- swiper CSS -->
-<link rel="stylesheet" href="css/slick.css" />
+<link rel="stylesheet" href="http://localhost:8080/css/slick.css" />
 <!-- style CSS -->
-<link rel="stylesheet" href="css/style.css" />
+<link rel="stylesheet" href="http://localhost:8080/css/style.css" />
 </head>
 
 
@@ -35,7 +39,7 @@
 				<div class="col-lg-12">
 					<nav class="navbar navbar-expand-lg navbar-light">
 						<a class="navbar-brand" th:href="@{/}"> <img
-							src="img/new_furnity_logo.png" alt="logo" />
+							src="http://localhost:8080/img/new_furnity_logo.png" alt="logo" />
 						</a>
 						<button class="navbar-toggler" type="button"
 							data-toggle="collapse" data-target="#navbarSupportedContent"
@@ -68,7 +72,7 @@
 								<a th:href="@{/item/new}" class="btn_3 small-btn"><i
 									class="ti-plus"></i> Add Furniture</a> <a th:href="@{/logout}"
 									class="btn_3 small-btn"><i class="ti-user"></i>logout</a>
-								<p 
+								<p
 									th:text="${'Welcome ' + user.firstName} + ' ' + ${user.secondName}"></p>
 							</div>
 							<div th:if="${user == null ||  #lists.isEmpty(user)}">
@@ -158,6 +162,35 @@
 				</div>
 			</div>
 		</div>
+		<!-- jquery plugins here-->
+		<!-- jquery -->
+		<script src="http://localhost:8080/js/jquery-1.12.1.min.js"></script>
+		<!-- popper js -->
+		<script src="http://localhost:8080/js/popper.min.js"></script>
+		<!-- bootstrap js -->
+		<script src="http://localhost:8080/js/bootstrap.min.js"></script>
+		<!-- easing js -->
+		<script src="http://localhost:8080/js/jquery.magnific-popup.js"></script>
+		<!-- swiper js -->
+		<script src="http://localhost:8080/js/swiper.min.js"></script>
+		<!-- swiper js -->
+		<script src="http://localhost:8080/js/masonry.pkgd.js"></script>
+		<!-- particles js -->
+		<script src="http://localhost:8080/js/owl.carousel.min.js"></script>
+		<!-- <script src="http://localhost:8080/js/jquery.nice-select.min.js"></script> -->
+		<!-- slick js -->
+		<script src="http://localhost:8080/js/slick.min.js"></script>
+		<script src="http://localhost:8080/js/jquery.counterup.min.js"></script>
+		<script src="http://localhost:8080/js/waypoints.min.js"></script>
+		<script src="http://localhost:8080/js/contact.js"></script>
+		<script src="http://localhost:8080/js/jquery.ajaxchimp.min.js"></script>
+		<script src="http://localhost:8080/js/jquery.form.js"></script>
+		<script src="http://localhost:8080/js/jquery.validate.min.js"></script>
+		<script src="http://localhost:8080/js/mail-script.js"></script>
+	<!-- 	<script src="http://localhost:8080/js/stellar.js"></script>
+		<script src="http://localhost:8080/js/price_rangs.js"></script> -->
+		<!-- custom js -->
+		<script src="http://localhost:8080/js/custom.js"></script>
 	</footer>
 	<!--::footer_part end::-->
 </body>

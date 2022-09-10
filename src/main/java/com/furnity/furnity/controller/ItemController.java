@@ -2,6 +2,8 @@ package com.furnity.furnity.controller;
 
 import java.util.List;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -14,8 +16,10 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.furnity.furnity.model.Category;
 import com.furnity.furnity.model.Item;
+import com.furnity.furnity.model.User;
 import com.furnity.furnity.service.CategoryService;
 import com.furnity.furnity.service.ItemService;
+import com.furnity.furnity.service.SecurityService;
 
 @Controller
 public class ItemController {
@@ -25,6 +29,8 @@ public class ItemController {
 
 	@Autowired
 	private final CategoryService categoryService;
+	@Autowired
+	private SecurityService securityService;
 
 	public ItemController(ItemService itemService, CategoryService categoryService) {
 		this.itemService = itemService;
@@ -32,7 +38,11 @@ public class ItemController {
 	}
 
 	@GetMapping("/item/new")
-	public String showNewItemForm(Model model) {
+	public String showNewItemForm(Model model,HttpSession session) {
+		if (securityService.isAuthenticated()) {
+			User user = (User) session.getAttribute("isUserLoggedInData");
+			model.addAttribute("user", user);
+		}
 		List<Category> categoryList = categoryService.findAllCategories();
 		model.addAttribute("item", new Item());
 		model.addAttribute("categoryList", categoryList);
@@ -74,7 +84,11 @@ public class ItemController {
 	}
 
 	@GetMapping("/item/edit/{id}")
-	public String editItem(@PathVariable(value = "id") Long id, Model model) {
+	public String editItem(@PathVariable(value = "id") Long id, Model model,HttpSession session) {
+		if (securityService.isAuthenticated()) {
+			User user = (User) session.getAttribute("isUserLoggedInData");
+			model.addAttribute("user", user);
+		}
 		List<Category> categoryList = categoryService.findAllCategories();
 		model.addAttribute("categoryList", categoryList);
 		Item item = itemService.findItemById(id);
