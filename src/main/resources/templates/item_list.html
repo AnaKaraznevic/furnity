@@ -8,6 +8,7 @@
 </head>
 
 <body>
+<p th:text="${user}"></p>
 <div class="container text-center">
     <div><h1>Item List</h1></div>
 
@@ -30,6 +31,7 @@
             <th scope="col">Color</th>
             <th scope="col">Material</th>
             <th scope="col">Style</th>
+            <th scope="col">User</th>
         </tr>
         </thead>
         <tbody>
@@ -37,7 +39,7 @@
             <tr>
                 <td>[[${item.id}]]</td>
                 <td><img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"></td>
-                <td>[[${item.category}]]</td>
+                <td>[[${item.category.name}]]</td>
                 <td>[[${item.name}]]</td>
                 <td>[[${item.description}]]</td>
                 <td>[[${item.price}]]</td>
@@ -45,6 +47,7 @@
                 <td>[[${item.itemColor}]]</td>
                 <td>[[${item.itemMaterial}]]</td>
                 <td>[[${item.itemStyle}]]</td>
+                <td>[[${item.user.firstName} + ' ' + ${item.user.secondName}]]</td>
                 <td>
                     <a th:href="@{'/item/edit/' + ${item.id}}">EDIT</a>
                     &nbsp;

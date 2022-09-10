@@ -43,7 +43,6 @@ public class User implements UserDetails {
     @CollectionTable(name = "roles")
     private Set<Role> roles = new HashSet<>();
 
-
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         return getRoles();
@@ -53,7 +52,6 @@ public class User implements UserDetails {
     public String getUsername() {
         return email;
     }
-
     @Override
     public boolean isAccountNonExpired() {
         return true;

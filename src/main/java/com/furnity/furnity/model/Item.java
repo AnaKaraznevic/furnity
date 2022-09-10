@@ -3,10 +3,9 @@ package com.furnity.furnity.model;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "item")
@@ -23,8 +22,9 @@ public class Item {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	// @Column(name = "user_id")
-	// private User userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Column(name = "name")
 	private String name;
