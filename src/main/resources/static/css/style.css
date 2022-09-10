@@ -7806,3 +7806,7 @@ h6 {
 header,footer {
   background: antiquewhite;
 }
+
+.has-error{
+	color: red;
+}

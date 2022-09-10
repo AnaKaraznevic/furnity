@@ -17,102 +17,109 @@ import com.furnity.furnity.service.UserService;
 @Controller
 public class UserController {
 
-	
 	@Autowired
 	UserService userService;
-	
-    @Autowired
-    private SecurityService securityService;
 
-    User user = null;
+	@Autowired
+	private SecurityService securityService;
 
-	
-	@GetMapping({"/", "/home"})
-	public String home() {
-		// model.addAttribute("customers", customerservice.listAllCustomers());			
+	User user = null;
+
+	@GetMapping({ "/", "/home" })
+	public String home(Model model, HttpSession session) {
+		// model.addAttribute("customers", customerservice.listAllCustomers());
+		if (securityService.isAuthenticated()) {
+
+			User user = (User) session.getAttribute("isUserLoggedInData");
+			model.addAttribute("user", user);
+		}
+
 		return "home";
-	}	
-	
+	}
+
 	@GetMapping(value = "/login")
 	public String login() {
-		// model.addAttribute("customers", customerservice.listAllCustomers());
-		System.out.println("Redirecting to products.html page.");
+		// System.out.println("Redirecting to products.html page.");
 		return "login";
 	}
-	
+
 	@PostMapping(value = "/login")
-	public String login(@ModelAttribute("user") User userForm, BindingResult bindingResult, Model model, HttpSession session) {
+	public String login(@ModelAttribute("user") User userForm, BindingResult bindingResult, Model model,
+			HttpSession session) {
 		System.out.println("====userform=====");
-		
-        if (securityService.isAuthenticated()) {
-        	session.setAttribute("isUserLoggedIn",true);
-        	return "home";
-        } else {
-        	try {
-        		
-        		user = userService.findByEmail(userForm.getEmail());
-        		
-        		 if (user == null) {
-        			 model.addAttribute("error", "Your username and password is invalid.");
-        			 return "login";
-        		 }
-        		securityService.autoLogin(userForm.getEmail(), userForm.getPassword());	
-        	
-        
-	        	if (securityService.isAuthenticated()) {
-	        		session.setAttribute("isUserLoggedIn", true);
-	        		user = userService.findByEmail(userForm.getEmail());
-	        		System.out.println("user: " + user.toString());
-	        		return "home";
-	        	} else {
-	        		return "login";
-	        	} 
-	        	
-        	} catch(Exception e) {
-        		e.printStackTrace();
-        		return "login";
-        	}
-        }
+
+		/*
+		 * if (securityService.isAuthenticated()) {
+		 * session.setAttribute("isUserLoggedIn",true); return "home"; } else {
+		 */
+
+		try {
+
+			user = userService.findByEmail(userForm.getEmail());
+			if (user == null) {
+				model.addAttribute("error", "Your username and password is invalid.");
+				model.addAttribute("user", null);
+				return "login";
+			}
+			System.out.println("user valeu test:" + user.toString());
+
+			securityService.autoLogin(userForm.getEmail(), userForm.getPassword());
+			if (securityService.isAuthenticated()) {
+				session.setAttribute("isUserLoggedIn", true);
+
+				user = userService.findByEmail(userForm.getEmail());
+				session.setAttribute("isUserLoggedInData", user);
+				model.addAttribute("user", user);
+				System.out.println("user: " + user.toString());
+				return "home";
+			} else {
+				return "login";
+			}
+
+		} catch (Exception e) {
+			e.printStackTrace();
+			return "login";
+		}
+		// }
 		/*
 		 * if(bindingResult.hasErrors()) { return "login?error"; }
 		 */
-	
+
 	}
-	
+
 	@GetMapping(value = "/logout")
 	public String logout(HttpSession session) {
-		// model.addAttribute("customers", customerservice.listAllCustomers());
+
 		System.out.println("Redirecting to products.html page.");
 		session.setAttribute("isUserLoggedIn", false);
+		session.setAttribute("isUserLoggedInData", null);
+
 		return "home";
 	}
-	
+
 	@GetMapping(value = "/register")
 	public String register() {
-		// model.addAttribute("customers", customerservice.listAllCustomers());
+
 		System.out.println("Redirecting to products.html page.");
 		return "register";
 	}
-	
+
 	@PostMapping(value = "/register")
 	public String register(@ModelAttribute("user") User user, BindingResult bindingResult) {
-	//	userValidator.validate(userForm, bindingResult);
+		// userValidator.validate(userForm, bindingResult);
 
-        if (bindingResult.hasErrors()) {
-            return "register";
-        }
+		if (bindingResult.hasErrors()) {
+			return "register";
+		}
 
-       userService.save(user);
+		userService.save(user);
 
-       // securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
+		// securityService.autoLogin(user.getUsername(), user.getPasswordConfirm());
 
-       // return "redirect:/welcome";
+		// return "redirect:/welcome";
 		return "home";
 	}
-	
-	
-	
-	
+
 	@GetMapping(value = "/add_furniture")
 	public String addFurniture() {
 		// model.addAttribute("customers", customerservice.listAllCustomers());

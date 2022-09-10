@@ -64,52 +64,16 @@
 							</ul>
 						</div>
 						<div class="hearer_icon d-flex">
-							<a th:href="@{/add_furniture}" class="btn_3 small-btn"><i
-								class="ti-plus"></i> Add Furniture</a>
-
-<!-- 							<div th:if="${not #lists.isEmpty(user)}">
-								<p th:text="${'Welcome ' + user.firstName} + ' ' + ${user.secondName}"></p>
-							</div> -->
-
-							<div th:if="${#lists.isEmpty(user)}">
+							<div th:if="${user != null || not #lists.isEmpty(user)}">
+								<a th:href="@{/add_furniture}" class="btn_3 small-btn"><i
+									class="ti-plus"></i> Add Furniture</a> <a th:href="@{/logout}"
+									class="btn_3 small-btn"><i class="ti-user"></i>logout</a>
+								<p 
+									th:text="${'Welcome ' + user.firstName} + ' ' + ${user.secondName}"></p>
+							</div>
+							<div th:if="${user == null ||  #lists.isEmpty(user)}">
 								<a th:href="@{/login}" class="btn_3 small-btn"><i
 									class="ti-user"></i>login</a>
-
-							</div>
-							<div th:if="${not #lists.isEmpty(user)}">
-								<a th:href="@{/logout}" class="btn_3 small-btn"><i
-									class="ti-user"></i>logout</a>
-							</div>
-
-
-					   <!-- <div th:if="${not session.getAttribute('isUserLoggedIn')}">     
-								<a th:href="@{/login}" class="btn_3 small-btn"><i
-									class="ti-user"></i>login</a>
-
-							</div>
-							<div th:if="${session.getAttribute('isUserLoggedIn')">
-								<a th:href="@{/}" class="btn_3 small-btn"><i class="ti-user"></i>logout</a>
-							</div> -->
-
-<!-- 							<div>
-								<a th:href="@{/login}" class="btn_3 small-btn"><i
-									class="ti-user"></i>login</a>
-
-							</div>
-							<div>
-								<a th:href="@{/logout}" method="post" class="btn_3 small-btn"><i
-									class="ti-user"></i>logout</a>
-
-							</div> -->
-
-
-							<!-- <a th:href="@{/login}" class="btn_3 small-btn"><i
-								class="ti-user"></i>login</a> -->
-							<div class="dropdown cart">
-								<a class="dropdown-toggle" href="#" id="navbarDropdown3"
-									role="button" data-toggle="dropdown" aria-haspopup="true"
-									aria-expanded="false"> <i class="fas fa-cart-plus"></i>
-								</a>
 							</div>
 						</div>
 					</nav>
