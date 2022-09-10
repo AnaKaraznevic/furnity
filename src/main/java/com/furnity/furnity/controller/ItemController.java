@@ -41,15 +41,19 @@ public class ItemController {
 
 	@PostMapping("/item/save")
 	public String saveNewItem(Item item, @RequestParam("filename") MultipartFile multipartFile) {
-		if (multipartFile.isEmpty()) {
-			System.out.println("empty filename");
-			return "redirect:/item/new";
-		}
-
+		/*
+		 * if (multipartFile.isEmpty()) { System.out.println("empty filename"); }
+		 */
+   System.out.println("======" + multipartFile.getContentType());
 		if (!((multipartFile.getContentType().equals("image/jpeg"))
-				|| (multipartFile.getContentType().equals("image/png")))) {
+				|| (multipartFile.getContentType().equals("image/png")) || multipartFile.getContentType().equals("application/octet-stream"))) {
 			System.out.println("Only jpeg and PNG file allowed");
-			return "redirect:/item/new";
+			System.out.println(item.getId());
+			if(item.getId() != 0){
+				return "redirect:/item/edit/" + item.getId();
+			} else {
+				return "redirect:/item/new";		
+			}
 		}
 
 		Item item1 = itemService.addItem(item, multipartFile);
