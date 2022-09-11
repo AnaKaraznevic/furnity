@@ -15,6 +15,7 @@ import java.nio.file.Paths;
 import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @Transactional
@@ -69,6 +70,21 @@ public class ItemService {
     public Item findItemById(Long id) {
         return itemRepository.findById(id)
                 .orElseThrow(() -> new ItemNotFoundException("Item by id " + id + " was not found"));
+    }
+
+    public Item updateItem( Long id, Item request ) {
+        Optional<Item> fromDB = itemRepository.findById(id);
+        if (fromDB.isPresent()) {
+            Item item = fromDB.get();
+            item.setCategory(request.getCategory());
+            item.setName(request.getName());
+            item.setPrice(request.getPrice());
+            item.setDescription(request.getDescription());
+            item.setItemCondition(request.getItemCondition());
+            return itemRepository.save(item);
+        } else {
+            throw new ItemNotFoundException("Item with ID :: " + id + " not found in DB");
+        }
     }
 
     public List<Item> findItemsByKeyword(String keyword) {
