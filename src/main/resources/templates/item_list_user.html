@@ -11,7 +11,7 @@
 <div class="container text-center">
     <div><h1>Item List</h1></div>
 
-    <form th:action="@{/item}" method="get">
+    <form th:action="@{/item/user}" method="get">
         <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ...." size="50" >
         <button type="submit" class="btn btn-info" >Search</button>
     </form>

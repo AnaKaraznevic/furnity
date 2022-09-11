@@ -1,5 +1,14 @@
 package com.furnity.furnity.service;
 
+import com.furnity.furnity.exception.ItemNotFoundException;
+import com.furnity.furnity.model.Item;
+import com.furnity.furnity.repository.ItemRepository;
+import org.apache.commons.io.FilenameUtils;
+import org.springframework.beans.factory.annotation.Value;
+import org.springframework.stereotype.Service;
+import org.springframework.web.multipart.MultipartFile;
+
+import javax.transaction.Transactional;
 import java.io.File;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -7,17 +16,6 @@ import java.nio.file.StandardCopyOption;
 import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
-
-import javax.transaction.Transactional;
-
-import org.apache.commons.io.FilenameUtils;
-import org.springframework.beans.factory.annotation.Value;
-import org.springframework.stereotype.Service;
-import org.springframework.web.multipart.MultipartFile;
-
-import com.furnity.furnity.exception.ItemNotFoundException;
-import com.furnity.furnity.model.Item;
-import com.furnity.furnity.repository.ItemRepository;
 
 @Service
 @Transactional
@@ -62,6 +60,9 @@ public class ItemService {
 		return itemRepository.findAll();
 	}
 
+	public List<Item> findItemsByUserId(Long id) {
+		return itemRepository.findItemsByUserId(id);
+	}
 	public void deleteItem(Long id) {
 		this.itemRepository.deleteById(id);
 	}
@@ -88,5 +89,9 @@ public class ItemService {
 
 	public List<Item> findItemsByKeyword(String keyword) {
 		return itemRepository.findByKeyword(keyword);
+	}
+
+	public List<Item> findItemsByKeywordAndUserId(String keyword, Long userId) {
+		return itemRepository.findByKeywordAndUserId(keyword, userId);
 	}
 }

@@ -86,7 +86,8 @@ public class ItemController {
 		return "item_form";
 	}
 
-	@RequestMapping(path = { "/item" })
+	//@RequestMapping(path = { "/item" })
+	@GetMapping("/item")
 	public String search(Model model, String keyword) {
 
 		if (keyword != null) {
@@ -98,6 +99,22 @@ public class ItemController {
 
 		}
 		return "item_list";
+	}
+
+	@GetMapping("/item/user")
+	public String searchUser(Model model, String keyword) {
+
+		User user = getLoggedUser();
+
+		if (keyword != null) {
+			List<Item> itemList = itemService.findItemsByKeywordAndUserId(keyword, user.getId());
+			model.addAttribute("itemList", itemList);
+		} else {
+			List<Item> itemList = itemService.findItemsByUserId(user.getId());
+			model.addAttribute("itemList", itemList);
+
+		}
+		return "item_list_user";
 	}
 
 	public User getLoggedUser ()

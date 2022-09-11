@@ -14,4 +14,13 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
             "or s.item_condition like %:keyword% or s.item_color like %:keyword% or s.item_material like %:keyword% " +
             "or s.item_style like %:keyword%", nativeQuery = true)
     List<Item> findByKeyword(@Param("keyword") String keyword);
+
+    @Query(value = "select * from Item s where (s.name like %:keyword% or s.description like %:keyword% " +
+            "or s.item_condition like %:keyword% or s.item_color like %:keyword% or s.item_material like %:keyword% " +
+            "or s.item_style like %:keyword%) and s.user_id = :userId", nativeQuery = true)
+    List<Item> findByKeywordAndUserId(@Param("keyword") String keyword, @Param("userId") Long userId);
+
+    List<Item> findItemsByUserId (Long userId);
+
+
 }
