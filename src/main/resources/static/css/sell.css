@@ -6,7 +6,7 @@
 .sell-body{
     width: 100%;
     height: 100vh;
-    background-image: url(../img/furnity-sell-background.jpeg);
+    background-image: url(../web-images/furnity-sell-background.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
     justify-content: center;
@@ -82,9 +82,15 @@ nav ul li a{
     border: none;
     color: white;
     margin-top: 40px;
+
 }
 
 .sell-h1{
-    margin-bottom: 30px;
+    margin-top: 50px;
     color: #db5c00;
+    text-align: center;
+}
+
+.sell-choose-file{
+    text-align: center;
 }

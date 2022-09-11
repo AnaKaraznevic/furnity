@@ -11,8 +11,6 @@ import org.springframework.security.config.annotation.web.configuration.WebSecur
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
-import org.springframework.web.servlet.config.annotation.ResourceHandlerRegistry;
-
 
 @Configuration
 @EnableWebSecurity
@@ -31,7 +29,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure( HttpSecurity http ) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/","/login","/registration","/resources/**",
-                        "/static/**", "/img/**", "/css/**").permitAll()
+                        "/static/**", "/css/**", "/db-images/**",
+                        "/web-images/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/")

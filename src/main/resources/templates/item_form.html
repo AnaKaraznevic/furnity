@@ -40,7 +40,7 @@
     <select class="sell-select" th:field="*{category}" required>
         <th:block th:each="cat : ${categoryList}">
             <option th:text="${cat.name}" th:value="${cat.id}" />
-                </th:block>
+        </th:block>
     </select>
 
     <input class="sell-input" type="text" th:field="*{name}" required />
@@ -64,38 +64,38 @@
     </select>
 
     <select class="sell-select" th:field="*{itemMaterial}" required>
-                    <option
-                            th:each="materialOpt : ${T(com.furnity.furnity.enums.ItemMaterial).values()}"
-                            th:value="${materialOpt}" th:text="${materialOpt}"></option>
+        <option
+                th:each="materialOpt : ${T(com.furnity.furnity.enums.ItemMaterial).values()}"
+                th:value="${materialOpt}" th:text="${materialOpt}"></option>
     </select>
 
 
-        <div class="form-group row">
-            <label class="col-form-label col-sm-4">Item Style : </label>
-            <div class="col-sm-8">
-                <select th:field="*{itemStyle}" class="form-control" required>
-                    <option
-                            th:each="styleOpt : ${T(com.furnity.furnity.enums.ItemStyle).values()}"
-                            th:value="${styleOpt}" th:text="${styleOpt}"></option>
-                </select>
-            </div>
+    <div class="form-group row">
+        <label class="col-form-label col-sm-4">Item Style : </label>
+        <div class="col-sm-8">
+            <select th:field="*{itemStyle}" class="form-control" required>
+                <option
+                        th:each="styleOpt : ${T(com.furnity.furnity.enums.ItemStyle).values()}"
+                        th:value="${styleOpt}" th:text="${styleOpt}"></option>
+            </select>
         </div>
+    </div>
 
-        <div class="form-group row">
-            <label for="furniture_photo" class="col-form-label col-sm-4">Upload Furniture
-                Photo : </label>
-            <div class="col-sm-8">
-                <input type="file" class="form-control" id="furniture_photo"
-                       name="filename" accept="image/png, image/jpeg" />
-            </div>
+    <div class="form-group row">
+        <label for="furniture_photo" class="col-form-label col-sm-4">Upload Furniture
+            Photo : </label>
+        <div class="col-sm-8">
+            <input type="file" class="form-control" id="furniture_photo"
+                   name="filename" accept="image/png, image/jpeg , image/jpg" />
         </div>
+    </div>
 
-        <div class="text-center p-3">
-            <input type="hidden" name="id" th:field="*{id}" />
-            <button type="submit" class="btn btn-primary">SAVE</button>
-        </div>
+    <div class="text-center p-3">
+        <input type="hidden" name="id" th:field="*{id}" />
+        <button type="submit" class="btn btn-primary">SAVE</button>
+    </div>
 
-    </form>
+</form>
 
 </body>
 </html>

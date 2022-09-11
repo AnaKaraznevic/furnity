@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import java.util.List;
 
 @Controller
-@RequestMapping("/")
+@RequestMapping(value = {"", "/"})
 public class HomePageController {
 
     @Autowired
@@ -30,6 +30,8 @@ public class HomePageController {
             model.addAttribute("user", user.getUsername());
             return "index";
         }
+        List<Item> itemList = itemService.findAllItems();
+        model.addAttribute("itemList", itemList);
         model.addAttribute("user", "anonymous");
         return "index";
     }

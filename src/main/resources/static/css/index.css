@@ -6,7 +6,7 @@
 .index-body{
     width: 100%;
     height: 100vh;
-    background-image: url(../img/furnity-index-background.jpeg);
+    background-image: url(../web-images/furnity-index-background.jpeg);
     background-size: cover;
     background-repeat: no-repeat;
 
@@ -47,4 +47,29 @@ nav ul li a{
 .index-h1{
     margin-bottom: 30px;
     color: #db5c00;
+    text-align: center;
+    margin-top: 50px;
+}
+
+.index-table{
+    width: 80%;
+    border-collapse: collapse;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+th{
+    height: 30px;
+    color: #db5c00;
+}
+
+td{
+    text-align: center;
+    height: 50px;
+    vertical-align: bottom;
+}
+
+.index-search{
+    margin: 0 auto;
+    width:300px;
 }

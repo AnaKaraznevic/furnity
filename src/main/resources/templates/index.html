@@ -16,7 +16,7 @@
 
   <nav class="index-nav">
     <div class="furnity-logo">
-      <img th:src="@{/img/furnity-final-logo.png}">
+      <img th:src="@{../static/web-images/furnity-final-logo.png}">
     </div>
 
     <p th:text="${user}"></p>
@@ -28,8 +28,8 @@
     <ul>
       <li> <a href="http://localhost:8080">Home</a> </li>
       <li> <a href="http://localhost:8080/login" >Login</a> </li>
-      <li> <a href="http://localhost:8080/registration" >Register/SignUp</a> </li>
-      <li> <a href="http://localhost:8080/item/new" >SELL</a> </li>
+      <li> <a href="http://localhost:8080/registration" >SignUp</a> </li>
+      <li> <a href="http://localhost:8080/item/new" >SELL</a></li>
     </ul>
   </nav>
 
@@ -38,16 +38,14 @@
 
     <h1 class="index-h1">Furniture List</h1>
 
-    <form th:action="@{/item}" method="get">
-      <input type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ...." size="50" >
+    <form class="index-search" th:action="@{/item}" method="get">
+      <input  type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ...." size="50" >
       <button type="submit" class="btn btn-info" >Search</button>
     </form>
-
 
     <table class="index-table">
       <thead class="index-thead">
       <tr>
-        <th scope="col">ID</th>
         <th scope="col">Item Image</th>
         <th scope="col">Category</th>
         <th scope="col">Name</th>
@@ -62,7 +60,6 @@
       <tbody>
       <th:block th:each="item : ${itemList}">
         <tr>
-          <td>[[${item.id}]]</td>
           <td><img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"></td>
           <td>[[${item.category}]]</td>
           <td>[[${item.name}]]</td>
