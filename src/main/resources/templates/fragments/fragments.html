@@ -54,11 +54,12 @@
 								<li class="nav-item"><a class="nav-link" th:href="@{/}">Home</a>
 								</li>
 								<li class="nav-item dropdown"><a
-									class="nav-link dropdown-toggle" href="blog.html"
+									class="nav-link dropdown-toggle" th:href="@{/item}"
 									id="navbarDropdown_1" role="button" data-toggle="dropdown"
-									aria-haspopup="true" aria-expanded="false"> Furniture
-										Category </a>
+									aria-haspopup="true" aria-expanded="false"> Shop </a>
 									<div class="dropdown-menu" aria-labelledby="navbarDropdown_1">
+										<a class="dropdown-item" th:href="@{/item}"> All Products
+										</a>
 										<a class="dropdown-item" href="category.html"> Living Room
 										</a> <a class="dropdown-item" href="category.html"> Bedroom </a> <a
 											class="dropdown-item" href="category.html"> Dining

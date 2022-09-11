@@ -98,7 +98,11 @@ public class ItemController {
 	}
 
 	@RequestMapping(path = { "/item" })
-	public String search(Model model, String keyword) {
+	public String search(Model model, String keyword,HttpSession session) {
+		if (securityService.isAuthenticated()) {
+			User user = (User) session.getAttribute("isUserLoggedInData");
+			model.addAttribute("user", user);
+		}
 		if (keyword != null) {
 			List<Item> itemList = itemService.findItemsByKeyword(keyword);
 			model.addAttribute("itemList", itemList);
