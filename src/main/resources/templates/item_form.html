@@ -100,9 +100,13 @@
 			<div class="form-group row">
 				<label for="furniture_photo" class="col-form-label col-sm-4">Upload Furniture
 					Photo : </label>
+				<div th:if="${item.file != null}">
+					<img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"/>
+					<input type="hidden" name="current_file" th:value="${item.file}" />
+				</div>
 				<div class="col-sm-8">
 					<input type="file" class="form-control" id="furniture_photo"
-						name="filename" accept="image/png, image/jpeg" />
+						name="filename" accept="image/png, image/jpeg"/>
 				</div>
 			</div>
 

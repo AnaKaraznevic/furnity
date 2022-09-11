@@ -31,8 +31,9 @@ public class ItemService {
 		this.itemRepository = itemRepository;
 	}
 
-	public Item addItem(Item item, MultipartFile multipartFile) {
+	public Item addItem(Item item, MultipartFile multipartFile, String currentFile) {
 		boolean isPhotoInserted = false;
+		String originalFilename = multipartFile.getOriginalFilename();
 		try {
 
 			Files.copy(multipartFile.getInputStream(),
@@ -47,12 +48,20 @@ public class ItemService {
 
 		if (isPhotoInserted) {
 
+			String file = item.getFile();
+
+			if (currentFile == null) {
+				file = item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
+						+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+			}
+
 			item.setFilename(null);
-			item.setFile(item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
-							+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
+			item.setFile(file);
 			return itemRepository.save(item);
-		} else
+		} else {
+
 			return null;
+		}
 
 	}
 
