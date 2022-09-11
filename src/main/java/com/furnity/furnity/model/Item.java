@@ -1,5 +1,9 @@
 package com.furnity.furnity.model;
 
+import com.furnity.furnity.enums.ItemColor;
+import com.furnity.furnity.enums.ItemCondition;
+import com.furnity.furnity.enums.ItemMaterial;
+import com.furnity.furnity.enums.ItemStyle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -23,8 +27,9 @@ public class Item {
 	@JoinColumn(name = "category_id")
 	private Category category;
 
-	// @Column(name = "user_id")
-	// private User userId;
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Column(name = "name")
 	private String name;
@@ -50,22 +55,6 @@ public class Item {
 	@Column(name = "item_style")
 	@Enumerated(EnumType.STRING)
 	private ItemStyle itemStyle;
-
-	public enum ItemCondition {
-		New, Good, Poor
-	};
-
-	public enum ItemColor {
-		Black, White, Red, Blue, Green, Brown, Grey, Pink, Purple
-	};
-
-	public enum ItemMaterial {
-		Glass, Metal, Wooden, Plastic
-	}
-
-	public enum ItemStyle {
-		Modern, Country, Rustic, Classic
-	}
 
 	@Lob
 	@Column(name = "filename")

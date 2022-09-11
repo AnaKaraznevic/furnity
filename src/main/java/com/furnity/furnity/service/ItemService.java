@@ -52,7 +52,7 @@ public class ItemService {
 
 			item.setFilename(null);
 			item.setFile(item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
-							+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
+					+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
 			return itemRepository.save(item);
 		} else
 			return null;
@@ -63,6 +63,9 @@ public class ItemService {
 		return itemRepository.findAll();
 	}
 
+	public List<Item> findItemsByUserId(Long id) {
+		return itemRepository.findItemsByUserId(id);
+	}
 	public void deleteItem(Long id) {
 		this.itemRepository.deleteById(id);
 	}
@@ -89,5 +92,9 @@ public class ItemService {
 
 	public List<Item> findItemsByKeyword(String keyword) {
 		return itemRepository.findByKeyword(keyword);
+	}
+
+	public List<Item> findItemsByKeywordAndUserId(String keyword, Long userId) {
+		return itemRepository.findByKeywordAndUserId(keyword, userId);
 	}
 }

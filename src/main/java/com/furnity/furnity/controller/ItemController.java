@@ -2,7 +2,11 @@ package com.furnity.furnity.controller;
 
 import java.util.List;
 
+import com.furnity.furnity.model.User;
+import com.furnity.furnity.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -26,9 +30,13 @@ public class ItemController {
 	@Autowired
 	private final CategoryService categoryService;
 
-	public ItemController(ItemService itemService, CategoryService categoryService) {
+	@Autowired
+	private final UserService userService;
+
+	public ItemController(ItemService itemService, CategoryService categoryService, UserService userService) {
 		this.itemService = itemService;
 		this.categoryService = categoryService;
+		this.userService = userService;
 	}
 
 	@GetMapping("/item/new")
@@ -41,6 +49,10 @@ public class ItemController {
 
 	@PostMapping("/item/save")
 	public String saveNewItem(Item item, @RequestParam("filename") MultipartFile multipartFile) {
+
+		User user = getLoggedUser();
+		item.setUser(user);
+
 		if (multipartFile.isEmpty()) {
 			System.out.println("empty filename");
 			return "redirect:/item/new";
@@ -55,7 +67,7 @@ public class ItemController {
 		Item item1 = itemService.addItem(item, multipartFile);
 		if (item1 != null) {
 			System.out.println("inserted");
-			return "redirect:/item";
+			return "redirect:/item/user";
 		} else {
 			System.out.println("not inserted");
 			return "redirect:/item/new";
@@ -79,8 +91,10 @@ public class ItemController {
 		return "item_form";
 	}
 
-	@RequestMapping(path = { "/item" })
+	//@RequestMapping(path = { "/item" })
+	@GetMapping("/item")
 	public String search(Model model, String keyword) {
+
 		if (keyword != null) {
 			List<Item> itemList = itemService.findItemsByKeyword(keyword);
 			model.addAttribute("itemList", itemList);
@@ -91,4 +105,36 @@ public class ItemController {
 		}
 		return "item_list";
 	}
+
+	@GetMapping("/item/user")
+	public String searchUser(Model model, String keyword) {
+
+		User user = getLoggedUser();
+
+		if (keyword != null) {
+			List<Item> itemList = itemService.findItemsByKeywordAndUserId(keyword, user.getId());
+			model.addAttribute("itemList", itemList);
+		} else {
+			List<Item> itemList = itemService.findItemsByUserId(user.getId());
+			model.addAttribute("itemList", itemList);
+
+		}
+		return "item_list_user";
+	}
+
+	public User getLoggedUser ()
+	{
+		Object principal = SecurityContextHolder.getContext().getAuthentication().getPrincipal();
+		String userName;
+
+		if (principal instanceof UserDetails) {
+			userName = ((UserDetails)principal).getUsername();
+		} else {
+			userName = principal.toString();
+		}
+
+		User user = userService.findUserByUserName(userName);
+		return user;
+	}
+
 }
