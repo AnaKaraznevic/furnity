@@ -15,6 +15,7 @@
 						<div class="custom_container_form_inner">
 							<h1>Welcome To Furnity To Donate Furniture!</h1>
 							<h3>Please Add Furniture Details Below To Donate:</h3>
+							<span class="has-error" th:text="${error}">th:text="${error}"</span>
 							<form class="row contact_form" th:action="@{/item/save}"
 								method="POST" th:object="${item}" novalidate="novalidate"
 								enctype="multipart/form-data">

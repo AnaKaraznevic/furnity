@@ -1,6 +1,7 @@
 package com.furnity.furnity.controller;
 
 import java.util.List;
+import java.util.Set;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -18,8 +19,8 @@ import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.furnity.furnity.model.Item;
+import com.furnity.furnity.model.Role;
 import com.furnity.furnity.model.User;
-import com.furnity.furnity.service.CategoryService;
 import com.furnity.furnity.service.ItemService;
 import com.furnity.furnity.service.SecurityService;
 import com.furnity.furnity.service.UserService;
@@ -29,25 +30,26 @@ public class UserController {
 
 	@Autowired
 	UserService userService;
-	
+
 	@Autowired
-	private final ItemService itemService;	
+	private final ItemService itemService;
 
 	@Autowired
 	private SecurityService securityService;
 
 	User user = null;
-	
+
 	public UserController(ItemService itemService) {
 		this.itemService = itemService;
-		
+
 	}
-	
+
 	@GetMapping({ "/", "/home" })
 	public String home(Model model, HttpSession session, String keyword) {
 		// model.addAttribute("customers", customerservice.listAllCustomers());
-		
+
 		if (securityService.isAuthenticated()) {
+
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
 		}
@@ -93,9 +95,24 @@ public class UserController {
 			securityService.autoLogin(userForm.getEmail(), userForm.getPassword());
 			if (securityService.isAuthenticated()) {
 				session.setAttribute("isUserLoggedIn", true);
-
+           
 				user = userService.findByEmail(userForm.getEmail());
+				Set<Role> roles=user.getRoles();
+				session.setAttribute("isAdmin", "false");
+			//	boolean isadmin=false;
+				roles.stream().forEach(role->{ 
+					if(role.getName().equalsIgnoreCase("admin"))
+					{
+						//isadmin=true;
+						session.setAttribute("isAdmin", "true");
+					}
+				});
+				if (session.getAttribute("isAdmin").equals("true")) {
+					
+					return "admin";
+				}
 				session.setAttribute("isUserLoggedInData", user);
+				
 				model.addAttribute("user", user);
 				System.out.println("user: " + user.toString());
 				return "home";
@@ -114,15 +131,14 @@ public class UserController {
 
 	}
 
-	
-	@GetMapping(value="/logout")  
-    public String logoutPage(HttpServletRequest request, HttpServletResponse response) {  
-        Authentication auth = SecurityContextHolder.getContext().getAuthentication();  
-        if (auth != null){      
-           new SecurityContextLogoutHandler().logout(request, response, auth);  
-        }  
-         return "redirect:/";  
-     }
+	@GetMapping(value = "/logout")
+	public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
+		Authentication auth = SecurityContextHolder.getContext().getAuthentication();
+		if (auth != null) {
+			new SecurityContextLogoutHandler().logout(request, response, auth);
+		}
+		return "redirect:/";
+	}
 
 	@GetMapping(value = "/register")
 	public String register() {
@@ -132,7 +148,8 @@ public class UserController {
 	}
 
 	@PostMapping(value = "/register")
-	public String register(@ModelAttribute("user") User user, BindingResult bindingResult) {
+	public String register(@ModelAttribute("user") User user, BindingResult bindingResult,Model model) {
+		
 		// userValidator.validate(userForm, bindingResult);
 
 		if (bindingResult.hasErrors()) {
@@ -140,9 +157,9 @@ public class UserController {
 		}
 
 		userService.save(user);
-
-	//	securityService.autoLogin(user.getEmail(), user.getPassword());
-
+		model.addAttribute("user",null);
+		//user=null;
+		// securityService.autoLogin(user.getEmail(), user.getPassword());
 		// return "redirect:/welcome";
 		return "login";
 	}

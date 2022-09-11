@@ -38,7 +38,7 @@ public class ItemController {
 	}
 
 	@GetMapping("/item/new")
-	public String showNewItemForm(Model model,HttpSession session) {
+	public String showNewItemForm(Model model, HttpSession session) {
 		if (securityService.isAuthenticated()) {
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
@@ -50,19 +50,22 @@ public class ItemController {
 	}
 
 	@PostMapping("/item/save")
-	public String saveNewItem(Item item, @RequestParam("filename") MultipartFile multipartFile) {
+	public String saveNewItem(Item item, @RequestParam("filename") MultipartFile multipartFile, HttpSession session,
+			Model model) {
 		/*
 		 * if (multipartFile.isEmpty()) { System.out.println("empty filename"); }
 		 */
-   System.out.println("======" + multipartFile.getContentType());
+
+		
 		if (!((multipartFile.getContentType().equals("image/jpeg"))
-				|| (multipartFile.getContentType().equals("image/png")) || multipartFile.getContentType().equals("application/octet-stream"))) {
+				|| (multipartFile.getContentType().equals("image/png"))
+				|| multipartFile.getContentType().equals("application/octet-stream"))) {
 			System.out.println("Only jpeg and PNG file allowed");
 			System.out.println(item.getId());
-			if(item.getId() != 0){
+			if (item.getId() != 0) {
 				return "redirect:/item/edit/" + item.getId();
 			} else {
-				return "redirect:/item/new";		
+				return "redirect:/item/new";
 			}
 		}
 
@@ -84,7 +87,7 @@ public class ItemController {
 	}
 
 	@GetMapping("/item/edit/{id}")
-	public String editItem(@PathVariable(value = "id") Long id, Model model,HttpSession session) {
+	public String editItem(@PathVariable(value = "id") Long id, Model model, HttpSession session) {
 		if (securityService.isAuthenticated()) {
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
@@ -98,7 +101,7 @@ public class ItemController {
 	}
 
 	@RequestMapping(path = { "/item" })
-	public String search(Model model, String keyword,HttpSession session) {
+	public String search(Model model, String keyword, HttpSession session) {
 		if (securityService.isAuthenticated()) {
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
