@@ -7,7 +7,6 @@ import com.furnity.furnity.enums.ItemStyle;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import org.springframework.web.multipart.MultipartFile;
 
 import javax.persistence.*;
 
@@ -55,9 +54,9 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	private ItemStyle itemStyle;
 
-	@Lob
-	@Column(name = "filename")
-	private MultipartFile filename;
+//	@Lob
+//	@Column(name = "filename")
+//	private MultipartFile filename;
 
 	@Column(name = "file")
 	private String file;

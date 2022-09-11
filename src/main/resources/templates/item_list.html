@@ -37,7 +37,7 @@
         <th:block th:each="item : ${itemList}">
             <tr>
                 <td>[[${item.id}]]</td>
-                <td><img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"></td>
+                <td><img alt="" th:src="@{${'/img/' + item.file}}" style="width: 100px;height: 100px;"></td>
                 <td>[[${item.category.name}]]</td>
                 <td>[[${item.name}]]</td>
                 <td>[[${item.description}]]</td>

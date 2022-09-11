@@ -43,10 +43,7 @@ public class ItemController {
 	}
 
 	@PostMapping("/item/save")
-	public String saveNewItem(
-			Item item,
-			@RequestParam("filename") MultipartFile multipartFile,
-			@RequestParam("current_file") String currentFile) {
+	public String saveNewItem(Item item, @RequestParam("filename") MultipartFile multipartFile) {
 
 		User user = getLoggedUser();
 		item.setUser(user);
@@ -54,14 +51,14 @@ public class ItemController {
 		if (!((multipartFile.getContentType().equals("image/jpeg"))
 				|| (multipartFile.getContentType().equals("image/png")) || multipartFile.getContentType().equals("application/octet-stream"))) {
 			System.out.println("Only jpeg and PNG file allowed");
-			if(item.getId() != 0){
+			if(item.getId() != null){
 				return "redirect:/item/edit/" + item.getId();
 			} else {
 				return "redirect:/item/new";
 			}
 		}
 
-		Item item1 = itemService.addItem(item, multipartFile, currentFile);
+		Item item1 = itemService.addItem(item, multipartFile);
 		if (item1 != null) {
 			System.out.println("inserted");
 			return "redirect:/item/user";
