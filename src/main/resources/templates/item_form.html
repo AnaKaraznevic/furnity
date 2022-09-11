@@ -58,7 +58,7 @@
 				<div class="col-sm-8">
 					<select th:field="*{itemCondition}" class="form-control" required>
 						<option
-							th:each="cond: ${T(com.furnity.furnity.model.Item.ItemCondition).values()}"
+							th:each="cond: ${T(com.furnity.furnity.enums.ItemCondition).values()}"
 							th:value="${cond}" th:text="${cond}"></option>
 					</select>
 				</div>
@@ -69,7 +69,7 @@
 				<div class="col-sm-8">
 					<select th:field="*{itemColor}" class="form-control" required>
 						<option
-							th:each="itemColor : ${T(com.furnity.furnity.model.Item.ItemColor).values()}"
+							th:each="itemColor : ${T(com.furnity.furnity.enums.ItemColor).values()}"
 							th:value="${itemColor}" th:text="${itemColor}"></option>
 					</select>
 				</div>
@@ -80,7 +80,7 @@
 				<div class="col-sm-8">
 					<select th:field="*{itemMaterial}" class="form-control" required>
 						<option
-							th:each="materialOpt : ${T(com.furnity.furnity.model.Item.ItemMaterial).values()}"
+							th:each="materialOpt : ${T(com.furnity.furnity.enums.ItemMaterial).values()}"
 							th:value="${materialOpt}" th:text="${materialOpt}"></option>
 					</select>
 				</div>
@@ -91,7 +91,7 @@
 				<div class="col-sm-8">
 					<select th:field="*{itemStyle}" class="form-control" required>
 						<option
-							th:each="styleOpt : ${T(com.furnity.furnity.model.Item.ItemStyle).values()}"
+							th:each="styleOpt : ${T(com.furnity.furnity.enums.ItemStyle).values()}"
 							th:value="${styleOpt}" th:text="${styleOpt}"></option>
 					</select>
 				</div>

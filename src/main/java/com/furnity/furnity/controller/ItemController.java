@@ -62,7 +62,7 @@ public class ItemController {
 		Item item1 = itemService.addItem(item, multipartFile);
 		if (item1 != null) {
 			System.out.println("inserted");
-			return "redirect:/item";
+			return "redirect:/item/user";
 		} else {
 			System.out.println("not inserted");
 			return "redirect:/item/new";
