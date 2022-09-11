@@ -35,6 +35,7 @@ public class ItemController {
 	public ItemController(ItemService itemService, CategoryService categoryService) {
 		this.itemService = itemService;
 		this.categoryService = categoryService;
+
 	}
 
 	@GetMapping("/item/new")
@@ -56,7 +57,6 @@ public class ItemController {
 		 * if (multipartFile.isEmpty()) { System.out.println("empty filename"); }
 		 */
 
-		
 		if (!((multipartFile.getContentType().equals("image/jpeg"))
 				|| (multipartFile.getContentType().equals("image/png"))
 				|| multipartFile.getContentType().equals("application/octet-stream"))) {
@@ -100,20 +100,49 @@ public class ItemController {
 		return "item_form";
 	}
 
-	@RequestMapping(path = { "/item" })
-	public String search(Model model, String keyword, HttpSession session) {
+	/*
+	 * @RequestMapping(path = { "/item" }) public String search(Model model, String
+	 * keyword, Integer category, HttpSession session) {
+	 * 
+	 * System.out.println("TESTSTSTSSTSTSTSTSTSTSTSTS"); if
+	 * (securityService.isAuthenticated()) { User user = (User)
+	 * session.getAttribute("isUserLoggedInData"); model.addAttribute("user", user);
+	 * } System.out.println("keyword===" + keyword + " category==" + category); if
+	 * (keyword != null) { List<Item> itemList =
+	 * itemService.findItemsByKeyword(keyword); model.addAttribute("itemList",
+	 * itemList); } else if (category != null) { List<Item> itemList =
+	 * itemService.findItemsByCategory(category); model.addAttribute("itemList",
+	 * itemList); } else { List<Item> itemList = itemService.findAllItems();
+	 * model.addAttribute("itemList", itemList); } return "item_list"; }
+	 */
+
+//, String keyword, Integer category
+	@RequestMapping("/item")
+	public String allItem(Model model, String keyword, Integer category, HttpSession session) {
+
 		if (securityService.isAuthenticated()) {
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
 		}
+		//System.out.println("keyword===" + keyword + " category==" + category);
+		//System.out.println("TESTT ITEM ==");
+		model.addAttribute("category_name", "");
 		if (keyword != null) {
 			List<Item> itemList = itemService.findItemsByKeyword(keyword);
 			model.addAttribute("itemList", itemList);
+		} else if (category != null) {
+			List<Item> itemList = itemService.findItemsByCategory(category);
+			System.out.println(" itemList==" + itemList);
+			model.addAttribute("itemList", itemList);
+			Category c1 = categoryService.findCategoryId(category);
+			model.addAttribute("category_name", c1.getName());
+			System.out.println("category ==" + c1.getName());
 		} else {
 			List<Item> itemList = itemService.findAllItems();
 			model.addAttribute("itemList", itemList);
-
 		}
+
 		return "item_list";
 	}
+
 }

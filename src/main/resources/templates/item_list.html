@@ -15,9 +15,12 @@
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
 							<h2>All Furniture Items</h2>
-							<p>
-								Home <span>-</span> All Furniture Items
+							<p th:if="${category_name == ''}">							
+								Home <span>-</span> All Furniture Items 
 							</p>
+							<p th:if="${category_name != '' }">
+								[[${category_name}]]
+							</p>							
 						</div>
 					</div>
 				</div>
@@ -62,7 +65,8 @@
 								<img alt="" th:src="@{${'/image/' + item.file}}"
 									style="width: 100%; height: 300px;">
 								<div class="single_product_text">
-									<h4>[[${item.name}]] ([[${item.category}]])</h4>
+									<h2>[[${item.name}]]</h2>
+									<h4><b>([[${item.category.name}]])</b></h4>
 									<h3>$[[${item.price}]]</h3>
 									<p>[[${item.description}]]</p>
 									<p>

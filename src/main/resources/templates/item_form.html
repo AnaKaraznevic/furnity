@@ -21,7 +21,7 @@
 								enctype="multipart/form-data">
 
 								<div class="col-md-12 form-group p_star">
-								<label>Item Category: </label>
+								<label><b>Item Category:</b> </label>
 									<select th:field="*{category}" class="form-control " required>
 										<th:block th:each="cat : ${categoryList}">
 											<option th:text="${cat.name}" th:value="${cat.id}" />
@@ -29,24 +29,24 @@
 									</select>
 								</div>
 								<div class="col-md-12 form-group p_star">
-                                      <label>Item Name: </label>
+                                      <label><b>Item Name: </b></label>
 									<input type="text" th:field="*{name}" class="form-control"
 										placeholder="Furniture Name" required />
 								</div>
 
 								<div class="col-md-12 form-group p_star">
-								<label>Item description: </label>
+								<label><b>Item description:</b> </label>
 									<input type="text" th:field="*{description}"
 										class="form-control" placeholder="Furniture Description"
 										required />
 								</div>
 								<div class="col-md-12 form-group p_star">
-								<label>Item price: </label>
+								<label><b>Item price:</b> </label>
 									<input type="number" th:field="*{price}" class="form-control"
 										placeholder="Furniture Price" required />
 								</div>
 								<div class="col-md-12 form-group p_star">
-								<label >Item Condition:</label>
+								<label ><b>Item Condition:</b></label>
 									<select th:field="*{itemCondition}" class="form-control"
 										required>
 										<option
@@ -56,7 +56,7 @@
 								</div>
 
 								<div class="col-md-12 form-group p_star">
-								<label >Item Color:</label>
+								<label ><b>Item Color:</b></label>
 									<select th:field="*{itemColor}" class="form-control" required>
 										<option
 											th:each="itemColor : ${T(com.furnity.furnity.model.Item.ItemColor).values()}"
@@ -64,7 +64,7 @@
 									</select>
 								</div>
 								<div class="col-md-12 form-group p_star">
-								<label >Item Material:</label>
+								<label ><b>Item Material:</b></label>
 									<select th:field="*{itemMaterial}" class="form-control"
 										required>
 										<option
@@ -73,7 +73,7 @@
 									</select>
 								</div>
 								<div class="col-md-12 form-group p_star">
-								<label >Item Style:</label>
+								<label ><b>Item Style:</b></label>
 									<select th:field="*{itemStyle}" class="form-control" required>
 										<option
 											th:each="styleOpt : ${T(com.furnity.furnity.model.Item.ItemStyle).values()}"
@@ -82,13 +82,14 @@
 								</div>
 								<div class="col-md-12 form-group p_star">
 
-									<label for="furniture_photo">Upload Furniture Photo</label> <input
+									<label for="furniture_photo"><b>Upload Furniture Photo</b></label> <input
 										type="file" class="form-control" id="furniture_photo"
-										accept="image/png, image/jpeg" name="filename" />
+										accept="image/png, image/jpeg"  name="filename" />
 
 								</div>
 
 								<div class="col-md-12 form-group">
+								    <input type="hidden" name="file" th:field="*{file}" />
 									<input type="hidden" name="id" th:field="*{id}" />
 									<button type="submit" value="submit" class="btn_3">
 										Add Furniture</button>

@@ -73,26 +73,30 @@
 								<a th:href="@{/item/new}" class="btn_3 small-btn"><i
 									class="ti-plus"></i> Add Furniture</a> <a th:href="@{/logout}"
 									class="btn_3 small-btn"><i class="ti-user"></i>logout</a>
-								<p
-									th:text="${'Welcome ' + user.firstName} + ' ' + ${user.secondName}"></p>
+								<br/>									
+								<b th:text="${'Welcome ' + user.firstName} + ' ' + ${user.secondName}"></b>																	
 							</div>
+							
 							<div th:if="${user == null ||  #lists.isEmpty(user)}">
 								<a th:href="@{/login}" class="btn_3 small-btn"><i
 									class="ti-user"></i>login</a>
 							</div>
 						</div>
+						<div class="hearer_icon d-flex">
+                            <a id="search_1" href="javascript:void(0)"><b><i class="ti-search"></i></b></a>
+                        </div>
 					</nav>
 				</div>
 			</div>
 		</div>
 		<div class="search_input" id="search_input_box">
 			<div class="container">
-				<form class="d-flex justify-content-between search-inner">
+				<form class="d-flex justify-content-between search-inner" th:action="@{/item}" method="get">
 					<input type="text" class="form-control" id="search_input"
-						placeholder="Search Here" />
+						placeholder="Search Furniture Here" name="keyword" th:value="${keyword}"/>
 					<button type="submit" class="btn"></button>
 					<span class="ti-close" id="close_search" title="Close Search"></span>
-				</form>
+				</form>			
 			</div>
 		</div>
 	</header>

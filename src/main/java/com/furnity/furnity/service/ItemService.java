@@ -89,4 +89,13 @@ public class ItemService {
 	public List<Item> findItemsByKeyword(String keyword) {
 		return itemRepository.findByKeyword(keyword);
 	}
+
+	public List<Item> findItemsByCategory(Integer category) {
+		System.out.println(" category==" + category);
+		return itemRepository.findByCategory(category);
+	}	
+	
+	public List<Item> findLatestItems(Integer itemNumber) {
+		return itemRepository.findLatestItems(itemNumber);
+	}		
 }

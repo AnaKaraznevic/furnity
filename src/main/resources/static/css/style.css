@@ -533,14 +533,13 @@ ul {
 .btn_2 {
   display: inline-block;
   width: 180px;
-  height: 60px;
   line-height: 60px;
   text-align: center;
   border-radius: 5px;
   background-color: #ff3368;
-  font-size: 15px;
+  font-size: 18px;
   font-family: "Poppins", sans-serif;
-  font-weight: 500;
+  font-weight: bold;
   color: #fff;
   -o-transition: all .4s ease-in-out;
   -webkit-transition: all .4s ease-in-out;
@@ -2644,7 +2643,6 @@ ul {
   background-color: #f8fbff;
   margin-bottom: 30px;
   position: relative;
-  height: 400px;
 }
 
 @media (max-width: 576px) {
@@ -2770,9 +2768,6 @@ ul {
 
 /***************** product list css *******************/
 /* line 3, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product_list.scss */
-.product_list .section_tittle {
-  text-align: left !important;
-}
 
 /* line 6, ../../01 cl html template/03_jun 2019/188_Aranoz shop_html/sass/_product_list.scss */
 .product_list .section_tittle h2 {

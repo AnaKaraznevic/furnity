@@ -18,9 +18,11 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
 
+import com.furnity.furnity.model.Category;
 import com.furnity.furnity.model.Item;
 import com.furnity.furnity.model.Role;
 import com.furnity.furnity.model.User;
+import com.furnity.furnity.service.CategoryService;
 import com.furnity.furnity.service.ItemService;
 import com.furnity.furnity.service.SecurityService;
 import com.furnity.furnity.service.UserService;
@@ -39,8 +41,13 @@ public class UserController {
 
 	User user = null;
 
-	public UserController(ItemService itemService) {
+    @Autowired
+    private final CategoryService categoryService;
+
+   
+	public UserController(ItemService itemService, CategoryService categoryService) {
 		this.itemService = itemService;
+		this.categoryService = categoryService;
 
 	}
 
@@ -48,20 +55,19 @@ public class UserController {
 	public String home(Model model, HttpSession session, String keyword) {
 		// model.addAttribute("customers", customerservice.listAllCustomers());
 
+		//User data used in header
 		if (securityService.isAuthenticated()) {
-
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
 		}
 
-		if (keyword != null) {
-			List<Item> itemList = itemService.findItemsByKeyword(keyword);
-			model.addAttribute("itemList", itemList);
-		} else {
-			List<Item> itemList = itemService.findAllItems();
-			model.addAttribute("itemList", itemList);
-
-		}
+		//item data 
+		List<Item> itemList = itemService.findLatestItems(8);
+		model.addAttribute("itemList", itemList);
+		
+		//category data
+        List<Category> categoryList = categoryService.findAllCategories();
+        model.addAttribute("categoryList" , categoryList);		
 
 		return "home";
 	}
@@ -170,4 +176,6 @@ public class UserController {
 		System.out.println("Redirecting to products.html page.");
 		return "add_furniture";
 	}
+	
+
 }
