@@ -69,7 +69,7 @@ public class ItemController {
 			}
 		}
 
-		Item item1 = itemService.addItem(item, multipartFile);
+		Item item1 = itemService.addItem(item, multipartFile,session);
 		if (item1 != null) {
 			System.out.println("inserted");
 			return "redirect:/item";

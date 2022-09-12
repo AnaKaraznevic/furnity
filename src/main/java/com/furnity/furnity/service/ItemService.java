@@ -8,6 +8,7 @@ import java.text.SimpleDateFormat;
 import java.util.List;
 import java.util.Optional;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 
 import org.apache.commons.io.FilenameUtils;
@@ -17,6 +18,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import com.furnity.furnity.exception.ItemNotFoundException;
 import com.furnity.furnity.model.Item;
+import com.furnity.furnity.model.User;
 import com.furnity.furnity.repository.ItemRepository;
 
 @Service
@@ -33,7 +35,7 @@ public class ItemService {
 		this.itemRepository = itemRepository;
 	}
 
-	public Item addItem(Item item, MultipartFile multipartFile) {
+	public Item addItem(Item item, MultipartFile multipartFile,HttpSession session) {
 		boolean isPhotoInserted = false;
 		try {
 
@@ -48,7 +50,8 @@ public class ItemService {
 		}
 
 		if (isPhotoInserted) {
-
+			User user = (User) session.getAttribute("isUserLoggedInData");
+			item.setUser(user);
 			item.setFilename(null);
 			item.setFile(item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
 							+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
