@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+
+<head>
+  <meta charset="UTF-8">
+  <title>Furnity - Sell</title>
+  <link rel="stylesheet" type="text/css" media="all"
+        href="../static/css/sell.css" th:href="@{/css/sell.css}" />
+</head>
+
+<body th:class="sell-body">
+
+<nav class="sell-nav">
+  <div class="furnity-logo">
+    <img th:src="@{../img/furnity-final-logo.png}">
+  </div>
+
+  <ul>
+    <li> <a href="http://localhost:8080">Home</a> </li>
+    <li> <a href="http://localhost:8080/login" >Login</a> </li>
+    <li> <a href="http://localhost:8080/registration" >Register/SignUp</a> </li>
+    <li> <a href="http://localhost:8080/item/new" >SELL</a> </li>
+  </ul>
+</nav>
+
+<form th:action="@{/item/save}" method="POST" th:object="${item}" enctype="multipart/form-data">
+
+  <h1 th:class="sell-h1">Sell You Item</h1>
+
+  <input type="hidden" name="id" th:field="*{id}"/>
+  <input type="hidden" name="file" th:field="${item.file}"/>
+
+  <select class="sell-select" th:field="*{category}" required>
+    <th:block th:each="cat : ${categoryList}">
+      <option th:text="${cat.name}" th:value="${cat.id}" />
+    </th:block>
+  </select>
+
+  <input class="sell-input" type="text" th:field="*{name}" required placeholder="Item name"/>
+
+  <input class="sell-input" type="text" th:field="*{description}" required placeholder="Item description" />
+
+  <input class="sell-input" type="number" step=0.1 th:field="*{price}" required placeholder="Item price"/>
+
+  <select class="sell-select" th:field="*{itemCondition}" required>
+    <option
+            th:each="cond: ${T(com.furnity.furnity.enums.ItemCondition).values()}"
+            th:value="${cond}" th:text="${cond}">
+
+    </option>
+  </select>
+
+  <select class="sell-select" th:field="*{itemColor}" required>
+    <option
+            th:each="itemColor : ${T(com.furnity.furnity.enums.ItemColor).values()}"
+            th:value="${itemColor}" th:text="${itemColor}"></option>
+  </select>
+
+  <select class="sell-select" th:field="*{itemMaterial}" required>
+    <option
+            th:each="materialOpt : ${T(com.furnity.furnity.enums.ItemMaterial).values()}"
+            th:value="${materialOpt}" th:text="${materialOpt}"></option>
+  </select>
+
+
+  <div class="form-group row">
+    <label class="col-form-label col-sm-4">Item Style : </label>
+    <div class="col-sm-8">
+      <select th:field="*{itemStyle}" class="form-control" required>
+        <option
+                th:each="styleOpt : ${T(com.furnity.furnity.enums.ItemStyle).values()}"
+                th:value="${styleOpt}" th:text="${styleOpt}"></option>
+      </select>
+    </div>
+  </div>
+
+  <div class="form-group row">
+    <label for="furniture_photo" class="col-form-label col-sm-4">Upload Furniture
+      Photo : </label>
+    <div class="col-sm-8">
+      <input type="file" class="form-control" id="furniture_photo"
+             name="filename" accept="image/png, image/jpeg , image/jpg" />
+    </div>
+  </div>
+
+  <div class="text-center p-3">
+    <input type="hidden" name="id" th:field="*{id}" />
+    <button type="submit" class="btn btn-primary">SAVE</button>
+  </div>
+
+</form>
+
+</body>
+</html>

@@ -4,5 +4,6 @@ public enum ItemStyle {
     MODERN,
     COUNTRY,
     RUSTIC,
-    CLASSIC;
+    CLASSIC,
+    NONE
 }

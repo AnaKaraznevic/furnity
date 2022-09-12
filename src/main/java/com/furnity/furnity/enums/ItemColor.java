@@ -9,5 +9,6 @@ public enum ItemColor {
     BROWN,
     GREY,
     PINK,
-    PURPLE;
+    PURPLE,
+    NONE;
 }

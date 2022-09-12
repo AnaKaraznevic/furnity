@@ -4,5 +4,6 @@ public enum ItemMaterial {
     GLASS,
     METAL,
     WOODEN,
-    PLASTIC;
+    PLASTIC,
+    NONE;
 }

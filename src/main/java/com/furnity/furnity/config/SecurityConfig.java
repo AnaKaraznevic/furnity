@@ -29,8 +29,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     protected void configure( HttpSecurity http ) throws Exception {
         http.authorizeRequests()
                 .antMatchers("/","/login","/registration","/resources/**",
-                        "/static/**", "/css/**", "/db-images/**",
-                        "/web-images/**").permitAll()
+                        "/upload/**", "/static/**", "/css/**","/img/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/")

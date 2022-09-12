@@ -25,7 +25,7 @@ import com.furnity.furnity.repository.ItemRepository;
 public class ItemService {
 
 	private final ItemRepository itemRepository;
-	@Value(("${furniture.filepath}"))
+	@Value(("${upload.filepath}"))
 	String UPLOAD_DIR;
 
 	String timeStamp = new SimpleDateFormat("yyyy.MM.dd.HH.mm.ss").format(new java.util.Date());
@@ -35,27 +35,25 @@ public class ItemService {
 	}
 
 	public Item addItem(Item item, MultipartFile multipartFile) {
-		boolean isPhotoInserted = false;
-		try {
 
-			Files.copy(multipartFile.getInputStream(),
-					Paths.get(UPLOAD_DIR + File.separator + item.getName().replace(".", "") + "_"
-							+ timeStamp.replace(".", "") + "."
-							+ FilenameUtils.getExtension(multipartFile.getOriginalFilename())),
-					StandardCopyOption.REPLACE_EXISTING);
-			isPhotoInserted = true;
-		} catch (Exception e) {
-			e.printStackTrace();
+		String originalFilename = multipartFile.getOriginalFilename();
+		if (originalFilename != null && !originalFilename.isEmpty()) {
+			try {
+				Files.copy(multipartFile.getInputStream(),
+						Paths.get(UPLOAD_DIR + File.separator + item.getName().replace(".", "") + "_"
+								+ timeStamp.replace(".", "") + "."
+								+ FilenameUtils.getExtension(multipartFile.getOriginalFilename())),
+						StandardCopyOption.REPLACE_EXISTING);
+
+				String file = item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
+						+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename());
+
+				item.setFile(file);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
-
-		if (isPhotoInserted) {
-
-			item.setFilename(null);
-			item.setFile(item.getName().replace(".", "") + "_" + timeStamp.replace(".", "")
-					+ "." + FilenameUtils.getExtension(multipartFile.getOriginalFilename()));
-			return itemRepository.save(item);
-		} else
-			return null;
+		return itemRepository.save(item);
 
 	}
 

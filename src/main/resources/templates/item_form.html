@@ -16,14 +16,8 @@
 
 <nav class="sell-nav">
     <div class="furnity-logo">
-        <img th:src="@{/img/furnity-final-logo.png}">
+        <img th:src="@{../img/furnity-final-logo.png}">
     </div>
-
-    <p th:text="${user}"></p>
-
-    <form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
-        <input type="submit" value="logout">
-    </form>
 
     <ul>
         <li> <a href="http://localhost:8080">Home</a> </li>
@@ -37,17 +31,20 @@
 
     <h1 th:class="sell-h1">Sell You Item</h1>
 
+    <input type="hidden" name="id" th:field="*{id}"/>
+    <input type="hidden" name="file" th:field="${item.file}"/>
+
     <select class="sell-select" th:field="*{category}" required>
         <th:block th:each="cat : ${categoryList}">
             <option th:text="${cat.name}" th:value="${cat.id}" />
         </th:block>
     </select>
 
-    <input class="sell-input" type="text" th:field="*{name}" required />
+    <input class="sell-input" type="text" th:field="*{name}" required placeholder="Item name"/>
 
-    <input class="sell-input" type="text" th:field="*{description}" required />
+    <input class="sell-input" type="text" th:field="*{description}" required placeholder="Item description" />
 
-    <input class="sell-input" type="number" th:field="*{price}" required />
+    <input class="sell-input" type="number" step=0.1 th:field="*{price}" required placeholder="Item price"/>
 
     <select class="sell-select" th:field="*{itemCondition}" required>
         <option
@@ -69,30 +66,25 @@
                 th:value="${materialOpt}" th:text="${materialOpt}"></option>
     </select>
 
-
-    <div class="form-group row">
-        <label class="col-form-label col-sm-4">Item Style : </label>
-        <div class="col-sm-8">
-            <select th:field="*{itemStyle}" class="form-control" required>
+            <select th:field="*{itemStyle}" class="sell-select" required>
                 <option
                         th:each="styleOpt : ${T(com.furnity.furnity.enums.ItemStyle).values()}"
                         th:value="${styleOpt}" th:text="${styleOpt}"></option>
             </select>
-        </div>
-    </div>
 
-    <div class="form-group row">
+    <div class="sell-select">
         <label for="furniture_photo" class="col-form-label col-sm-4">Upload Furniture
             Photo : </label>
         <div class="col-sm-8">
             <input type="file" class="form-control" id="furniture_photo"
-                   name="filename" accept="image/png, image/jpeg , image/jpg" />
+                   name="filename" accept="image/png, image/jpeg , image/jpg" required/>
         </div>
     </div>
 
-    <div class="text-center p-3">
-        <input type="hidden" name="id" th:field="*{id}" />
-        <button type="submit" class="btn btn-primary">SAVE</button>
+    <input type="hidden" name="id" th:field="*{id}" />
+
+    <div class="button-div">
+        <button type="submit" class="sell-button">SAVE</button>
     </div>
 
 </form>

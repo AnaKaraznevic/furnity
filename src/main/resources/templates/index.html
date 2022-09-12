@@ -16,14 +16,15 @@
 
   <nav class="index-nav">
     <div class="furnity-logo">
-      <img th:src="@{../static/web-images/furnity-final-logo.png}">
+      <img th:src="@{../img/furnity-final-logo.png}">
     </div>
 
-    <p th:text="${user}"></p>
-
+    <div class="logout-div">
+    <p class="user-id" th:text="${user}"></p>
     <form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
-      <input type="submit" value="logout">
+      <input class="logout-submit" type="submit" value="LOGOUT">
     </form>
+    </div>
 
     <ul>
       <li> <a href="http://localhost:8080">Home</a> </li>
@@ -60,7 +61,7 @@
       <tbody>
       <th:block th:each="item : ${itemList}">
         <tr>
-          <td><img alt="" th:src="@{${'/image/' + item.file}}" style="width: 100px;height: 100px;"></td>
+          <td><img alt="" th:src="@{${'/upload/' + item.file}}" style="width: 100px;height: 100px;"></td>
           <td>[[${item.category}]]</td>
           <td>[[${item.name}]]</td>
           <td>[[${item.description}]]</td>

@@ -56,10 +56,6 @@ public class Item {
 	@Enumerated(EnumType.STRING)
 	private ItemStyle itemStyle;
 
-	@Lob
-	@Column(name = "filename")
-	private MultipartFile filename;
-
 	@Column(name = "file")
 	private String file;
 }
