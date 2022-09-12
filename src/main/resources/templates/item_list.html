@@ -14,13 +14,10 @@
 				<div class="col-lg-8">
 					<div class="breadcrumb_iner">
 						<div class="breadcrumb_iner_item">
-							<h2>All Furniture Items</h2>
-							<p th:if="${category_name == ''}">							
-								Home <span>-</span> All Furniture Items 
-							</p>
-							<p th:if="${category_name != '' }">
+							<h2 th:if="${category_name == null}">All Furniture Items</h2>
+							<h2 th:if="${category_name != null }">
 								[[${category_name}]]
-							</p>							
+							</h2>							
 						</div>
 					</div>
 				</div>
@@ -81,8 +78,10 @@
 									<p>
 										<b>Furniture Style : </b>[[${item.itemStyle}]]
 									</p>
+									<div th:if="${user != null}">
 									<a th:href="@{'/item/edit/' + ${item.id}}">EDIT</a> <a
 										th:href="@{'/item/delete/' + ${item.id}}">DELETE</a>
+										</div>
 								</div>
 							</div>
 						</div>

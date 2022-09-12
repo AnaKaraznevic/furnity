@@ -23,4 +23,8 @@ public interface ItemRepository extends JpaRepository<Item, Long> {
     
     @Query(value = "select * from Item s order by id desc limit :itemNumber", nativeQuery = true)   
     List<Item> findLatestItems(@Param("itemNumber") int itemNumber);
+    
+    @Query(value = "select * from Item s where s.user_id= :userid", nativeQuery = true)   
+    List<Item> findItemsByUserId(@Param("userid") int userid);
+    
 }

@@ -118,15 +118,15 @@ public class ItemController {
 
 //, String keyword, Integer category
 	@RequestMapping("/item")
-	public String allItem(Model model, String keyword, Integer category, HttpSession session) {
-
+	public String allItem(Model model, String keyword, Integer category, Integer userid, HttpSession session) {
+		model.addAttribute("user", null);
 		if (securityService.isAuthenticated()) {
 			User user = (User) session.getAttribute("isUserLoggedInData");
 			model.addAttribute("user", user);
 		}
-		//System.out.println("keyword===" + keyword + " category==" + category);
-		//System.out.println("TESTT ITEM ==");
-		model.addAttribute("category_name", "");
+		System.out.println("keyword===" + keyword + " category==" + category);
+		// System.out.println("TESTT ITEM ==");
+		model.addAttribute("category_name", null);
 		if (keyword != null) {
 			List<Item> itemList = itemService.findItemsByKeyword(keyword);
 			model.addAttribute("itemList", itemList);
@@ -137,6 +137,11 @@ public class ItemController {
 			Category c1 = categoryService.findCategoryId(category);
 			model.addAttribute("category_name", c1.getName());
 			System.out.println("category ==" + c1.getName());
+		} else if (userid != null) {
+			List<Item> itemList = itemService.findItemsByUserId(userid);
+			System.out.println(" itemList==" + itemList);
+			model.addAttribute("itemList", itemList);
+			model.addAttribute("category_name", "My Items");
 		} else {
 			List<Item> itemList = itemService.findAllItems();
 			model.addAttribute("itemList", itemList);

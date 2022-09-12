@@ -80,6 +80,7 @@ public class ItemService {
 			item.setPrice(request.getPrice());
 			item.setDescription(request.getDescription());
 			item.setItemCondition(request.getItemCondition());
+			item.setUser(request.getUser());
 			return itemRepository.save(item);
 		} else {
 			throw new ItemNotFoundException("Item with ID :: " + id + " not found in DB");
@@ -97,5 +98,9 @@ public class ItemService {
 	
 	public List<Item> findLatestItems(Integer itemNumber) {
 		return itemRepository.findLatestItems(itemNumber);
-	}		
+	}	
+	public List<Item> findItemsByUserId(Integer userid) {
+		return itemRepository.findItemsByUserId(userid);
+	}
+	
 }

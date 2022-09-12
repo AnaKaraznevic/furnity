@@ -1,12 +1,22 @@
 package com.furnity.furnity.model;
 
+import javax.persistence.Column;
+import javax.persistence.Entity;
+import javax.persistence.EnumType;
+import javax.persistence.Enumerated;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.Lob;
+import javax.persistence.ManyToOne;
+import javax.persistence.Table;
+
+import org.springframework.web.multipart.MultipartFile;
+
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-
-import javax.persistence.*;
-
-import org.springframework.web.multipart.MultipartFile;
 
 @Entity
 @Table(name = "item")
@@ -22,9 +32,11 @@ public class Item {
 	@ManyToOne
 	@JoinColumn(name = "category_id")
 	private Category category;
-
-	// @Column(name = "user_id")
-	// private User userId;
+	
+	//(name = "COMPANY_ID", referencedColumnName = "COMPANY_ID", insertable = false, updatable = false)
+	@ManyToOne
+	@JoinColumn(name = "user_id")
+	private User user;
 
 	@Column(name = "name")
 	private String name;

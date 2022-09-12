@@ -11,6 +11,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToMany;
+import javax.persistence.OneToMany;
 import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
@@ -27,7 +28,7 @@ import lombok.NoArgsConstructor;
 
 public class User {
 
-
+	
     @Id
     @Column(name = "id", unique = true, nullable = false, updatable = false)
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -49,6 +50,9 @@ public class User {
     @Column(name = "password", nullable = false)
     private String password;
 
+    
+  //  @OneToMany(mappedBy="userId") 
+  //  private Set<Item> items;
     
     @ManyToMany
     private Set<Role> roles;
