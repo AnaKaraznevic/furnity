@@ -4,36 +4,35 @@
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-  <meta charset="UTF-8">
-  <title>Registration Page</title>
+    <meta charset="UTF-8">
+    <title>Furnity - SignUp</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../css/registration.css" th:href="@{/css/registration.css}" />
 </head>
 
-<body>
 
-<h2>Registration Page</h2>
+<body class="registration-body">
 
-<form th:action="@{/registration}" method="post">
+    <nav class="registration-nav">
+        <div class="furnity-logo">
+            <img th:src="@{../img/furnity-final-logo.png}">
+        </div>
+        <ul>
+            <li> <a href="http://localhost:8080">Home</a> </li>
+            <li> <a href="http://localhost:8080/login" >Login</a> </li>
+            <li> <a href="http://localhost:8080/registration" >SignUp</a> </li>
+            <li> <a href="http://localhost:8080/item/new" >SELL</a> </li>
+        </ul>
+    </nav>
 
-First Name<label>
-  <input type="text" name="firstName"/>
-</label>
-
-  Second Name<label>
-  <input type="text" name="secondName"/>
-</label>
-
-  Username/Email<label>
-  <input type="text" name="email"/>
-</label>
-
-  Password<label>
-  <input type="password" name="password"/>
-</label>
-
-  <input type="submit" value="registration">
-
-</form>
-
+    <form class="registration-form" th:action="@{/registration}" method="post">
+        <h1 class="registration-h1">SignUp</h1>
+        <input class="registration-input" type="text" name="firstName" placeholder="First name">
+        <input class="registration-input" type="text" name="secondName" placeholder="Second name">
+        <input class="registration-input" type="text" name="email" placeholder="Email">
+        <input class="registration-input" type="password" name="password" placeholder="Password">
+        <input class="registration-input" type="password" name="" placeholder="Confirm Password">
+        <button class="registration-button" type="submit" >SignUp</button>
+    </form>
 </body>
-
 </html>

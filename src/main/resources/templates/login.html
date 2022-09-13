@@ -5,27 +5,31 @@
 
 <head>
     <meta charset="UTF-8">
-    <title>Login Page</title>
+    <title>Furnity - Login</title>
+    <link rel="stylesheet" type="text/css" media="all"
+          href="../static/images/login.css" th:href="@{/css/login.css}" />
 </head>
 
-<body>
+<body class="login-body">
 
-    <h2>Login Page</h2>
+<nav class="login-nav">
+    <div class="furnity-logo">
+        <img th:src="@{../img/furnity-final-logo.png}">
+    </div>
+    <ul>
+        <li> <a href="http://localhost:8080">Home</a> </li>
+        <li> <a href="http://localhost:8080/login" >Login</a> </li>
+        <li> <a href="http://localhost:8080/registration" >Register/SignUp</a> </li>
+        <li> <a href="http://localhost:8080/item/new">SELL</a> </li>
+    </ul>
+</nav>
 
-    <form method="post" th:action="@{/login}">
-
-        Username/ Email <label>
-                            <input type="text" name="username"/>
-                        </label>
-
-        Password <label>
-                    <input type="text" name="password"/>
-                </label>
-
-        <input type="submit" value="login">
-
-    </form>
-    <br>
+<form class="login-form" th:action="@{/login}" method="post">
+    <h1 class="login-h1">Login</h1>
+    <input class="login-input" type="text" name="username" placeholder="Email">
+    <input class="login-input" type="password" name="password" placeholder="Password">
+    <button class="login-button" type="submit" value="login">LOGIN</button>
+</form>
 
 </body>
 

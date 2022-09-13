@@ -1,27 +1,81 @@
 <!DOCTYPE html>
-<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+
+<html lang="en"
+      xmlns="http://www.w3.org/1999/xhtml"
       xmlns:th="http://www.thymeleaf.org"
       xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
 
 <head>
-    <meta charset="UTF-8">
-    <title>Index Page</title>
+  <meta charset="UTF-8">
+  <title>Furnity Home</title>
+  <link rel="stylesheet" type="text/css" media="all"
+        href="../static/css/index.css" th:href="@{/css/index.css}" />
 </head>
 
-<body>
+<body class="index-body">
 
-<p th:text="${user}"></p>
+  <nav class="index-nav">
+    <div class="furnity-logo">
+      <img th:src="@{../img/furnity-final-logo.png}">
+    </div>
 
-<form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
-    <input type="submit" value="logout">
-</form>
+    <div class="logout-div">
+    <p class="user-id" th:text="${user}"></p>
+    <form method="post" th:action="@{/logout}" th:if="${user!='anonymous'}">
+      <input class="logout-submit" type="submit" value="LOGOUT">
+    </form>
+    </div>
 
-<h2>Index Page</h2>
+    <ul>
+      <li> <a href="http://localhost:8080">Home</a> </li>
+      <li> <a href="http://localhost:8080/login" >Login</a> </li>
+      <li> <a href="http://localhost:8080/registration" >SignUp</a> </li>
+      <li> <a href="http://localhost:8080/item/new" >SELL</a></li>
+    </ul>
+  </nav>
 
-<a th:href="@{/login}">Login Page</a> <br>
-<a th:href="@{/registration}">Registration Page</a> <br>
-<a th:href="@{/user}">User Page</a> <br>
-<a th:href="@{/admin}">Admin Page</a> <br>
+  <!-- Furniture List -->
+  <div class="index-div">
+
+    <h1 class="index-h1">Furniture List</h1>
+
+    <form class="index-search" th:action="@{/item}" method="get">
+      <input  type="text" name="keyword" th:value="${keyword}"  placeholder="Find by ...." size="50" >
+      <button type="submit" class="btn btn-info" >Search</button>
+    </form>
+
+    <table class="index-table">
+      <thead class="index-thead">
+      <tr>
+        <th scope="col">Item Image</th>
+        <th scope="col">Category</th>
+        <th scope="col">Name</th>
+        <th scope="col">Description</th>
+        <th scope="col">Price</th>
+        <th scope="col">Condition</th>
+        <th scope="col">Color</th>
+        <th scope="col">Material</th>
+        <th scope="col">Style</th>
+      </tr>
+      </thead>
+      <tbody>
+      <th:block th:each="item : ${itemList}">
+        <tr>
+          <td><img alt="" th:src="@{${'/upload/' + item.file}}" style="width: 100px;height: 100px;"></td>
+          <td>[[${item.category}]]</td>
+          <td>[[${item.name}]]</td>
+          <td>[[${item.description}]]</td>
+          <td>[[${item.price}]]</td>
+          <td>[[${item.itemCondition}]]</td>
+          <td>[[${item.itemColor}]]</td>
+          <td>[[${item.itemMaterial}]]</td>
+          <td>[[${item.itemStyle}]]</td>
+        </tr>
+      </th:block>
+      </tbody>
+    </table>
+  </div>
+
 
 </body>
 

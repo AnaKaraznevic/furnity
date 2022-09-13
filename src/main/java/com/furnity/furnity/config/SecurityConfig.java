@@ -1,6 +1,5 @@
 package com.furnity.furnity.config;
 
-import com.furnity.furnity.service.UserDetailsServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -29,7 +28,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure( HttpSecurity http ) throws Exception {
         http.authorizeRequests()
-                .antMatchers("/","/login","/registration").permitAll()
+                .antMatchers("/","/login","/registration","/resources/**",
+                        "/upload/**", "/static/**", "/css/**","/img/**").permitAll()
                 .anyRequest().authenticated()
                 .and()
                 .formLogin().loginPage("/login").defaultSuccessUrl("/")
